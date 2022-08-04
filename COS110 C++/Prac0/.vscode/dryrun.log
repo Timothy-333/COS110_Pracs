@@ -1,0 +1,5 @@
+make --dry-run --keep-going --print-directory
+make: Entering directory '/mnt/c/Users/User/Desktop/Tuks/2nd Semester/COS 110/C++/Prac0'
+make: 'main' is up to date.
+make: Leaving directory '/mnt/c/Users/User/Desktop/Tuks/2nd Semester/COS 110/C++/Prac0'
+ 
