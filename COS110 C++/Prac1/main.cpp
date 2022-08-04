@@ -33,6 +33,7 @@ int main()
 	cout << floorOrder << endl;
 	while(!inData.eof())
 	{
+
 		string floor;
 		getline(inData, floor);
 		floor = floor.substr(floor.find(":") + 1, floor.length()-1);
@@ -41,17 +42,23 @@ int main()
 		{
 			maxFloors = floornumber;
 		}
+
 		string people;
 		getline(inData, people);
+		int previos = 0;
+		
+		istringstream iss(people);
+		while(getline(iss, people, ','))
+		{
+			cout << people << endl;
+		}
 
 		cout << floornumber << endl;
-		cout << people << endl;
 	}
 	inData.clear();
 	inData.seekg(0);
 
 	inData.close();
-
 	//delete[] floorArray;
 	//floorArray = NULL;
 	return 0;
