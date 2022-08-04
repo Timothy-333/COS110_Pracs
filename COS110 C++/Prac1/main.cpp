@@ -17,8 +17,43 @@ int stringToInt(string line){
 	return temp;
 }
 
-int main() {
+int main() 
+{
+	ifstream inData;
+	inData.open("building.data");
+	if(!inData)
+	{
+		cout << "Error opening file" << endl;
+		return 1;
+	}
+	string floorOrder;
+	getline(inData, floorOrder);
+	//int** floorArray = new int*[numFloors];
+	int maxFloors = -10;
+	cout << floorOrder << endl;
+	while(!inData.eof())
+	{
+		string floor;
+		getline(inData, floor);
+		floor = floor.substr(floor.find(":") + 1, floor.length()-1);
+		int floornumber = stringToInt(floor);
+		if(floornumber > maxFloors)
+		{
+			maxFloors = floornumber;
+		}
+		string people;
+		getline(inData, people);
 
+		cout << floornumber << endl;
+		cout << people << endl;
+	}
+	inData.clear();
+	inData.seekg(0);
+
+	inData.close();
+
+	//delete[] floorArray;
+	//floorArray = NULL;
 	return 0;
 }
 
