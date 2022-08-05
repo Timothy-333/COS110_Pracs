@@ -10,7 +10,8 @@ using namespace std;
 	stringToInt is a helper function that will 
 	take a string called line and return the integer value
 */
-int stringToInt(string line){
+int stringToInt(string line)
+{
 	stringstream s1(line);
 	int temp = 0;
 	s1 >> temp;
@@ -26,41 +27,75 @@ int main()
 		cout << "Error opening file" << endl;
 		return 1;
 	}
+
+	int maxFloors = -10;
 	string floorOrder;
 	getline(inData, floorOrder);
-	//int** floorArray = new int*[numFloors];
-	int maxFloors = -10;
-	cout << floorOrder << endl;
+	string floorOrder2 = floorOrder;
+	istringstream iss(floorOrder);
+	while(getline(iss, floorOrder, ','))
+	{
+		int currentFloor = stringToInt(floorOrder);
+		if(currentFloor > maxFloors)
+		{
+			maxFloors = currentFloor;
+		}
+	}
+	int* peopleCount = new int[maxFloors+1];
+	string** floorArray = new string*[maxFloors];
 	while(!inData.eof())
 	{
-
 		string floor;
 		getline(inData, floor);
 		floor = floor.substr(floor.find(":") + 1, floor.length()-1);
 		int floornumber = stringToInt(floor);
-		if(floornumber > maxFloors)
-		{
-			maxFloors = floornumber;
-		}
-
+		
+		int numPeople = 1;
 		string people;
 		getline(inData, people);
-		int previos = 0;
 		
+		for (int i = 0; i < people.length(); i++)
+		{
+			if(people[i] == ',')
+			{
+				numPeople++;
+			}
+		}
+
+		peopleCount[floornumber] = numPeople;
+		int personCounter = 0;
+		floorArray[floornumber] = new string[numPeople];
 		istringstream iss(people);
 		while(getline(iss, people, ','))
 		{
-			cout << people << endl;
+			floorArray[floornumber][personCounter] = people;
+			personCounter++;
 		}
-
-		cout << floornumber << endl;
 	}
-	inData.clear();
-	inData.seekg(0);
-
+	istringstream iss2(floorOrder2);
+	while(getline(iss2, floorOrder2, ','))
+	{
+		int currentFloor = stringToInt(floorOrder2);
+		for (int i = peopleCount[currentFloor]-1; i >= 0 ; i--)
+		{
+			cout << floorArray[currentFloor][i];
+			if(i != 0)
+			{
+				cout << ",";
+			}
+		}
+		cout << endl;
+	}
+	for (size_t i = 0; i < maxFloors+1; i++)
+	{
+		delete[] floorArray[i];
+	}
+	
 	inData.close();
-	//delete[] floorArray;
-	//floorArray = NULL;
+	delete floorArray;
+	delete peopleCount;
+	peopleCount = NULL;
+	floorArray = NULL;
 	return 0;
 }
 
