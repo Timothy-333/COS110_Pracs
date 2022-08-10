@@ -1,0 +1,9 @@
+make --dry-run --always-make --keep-going --print-directory
+make: Entering directory '/mnt/c/Users/User/Desktop/Tuks/2nd Semester/COS 110/COS110_Pracs/COS110 C++/Assignment1'
+make: Leaving directory '/mnt/c/Users/User/Desktop/Tuks/2nd Semester/COS 110/COS110_Pracs/COS110 C++/Assignment1'
+ 
+make: *** No rule to make target 'Chromosone.h', needed by 'main.o'.
+make: *** No rule to make target 'FitnessFunction.o', needed by 'main'.
+make: *** No rule to make target 'GA.o', needed by 'main'.
+make: *** No rule to make target 'RandomGenerator.o', needed by 'main'.
+

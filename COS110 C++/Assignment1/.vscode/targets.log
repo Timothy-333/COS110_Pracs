@@ -6,7 +6,7 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
 
-# Make data base, printed on Wed Aug 10 19:25:29 2022
+# Make data base, printed on Wed Aug 10 18:39:19 2022
 
 # Variables
 
@@ -25,19 +25,21 @@ WSLENV = VSCODE_WSL_EXT_LOCATION/up
 # automatic
 @F = $(notdir $@)
 # makefile
-CURDIR := /mnt/c/Users/User/Desktop/Tuks/2nd Semester/COS 110/COS110_Pracs/COS110 C++
+CURDIR := /mnt/c/Users/User/Desktop/Tuks/2nd Semester/COS 110/COS110_Pracs/COS110 C++/Assignment1
 # makefile
 SHELL = /bin/sh
 # environment
 VSCODE_NLS_CONFIG = {"locale":"en","availableLanguages":{}}
 # environment
 _ = /home/timothy/.vscode-server/bin/da76f93349a72022ca4670c1b84860304616aaa2/node
-# makefile
-MAKEFILE_LIST := 
+# makefile (from 'makefile', line 1)
+MAKEFILE_LIST :=  makefile
 # 'override' directive
 GNUMAKEFLAGS := 
 # environment
 XDG_DATA_DIRS = /usr/local/share:/usr/share:/var/lib/snapd/desktop
+# makefile (from 'makefile', line 1)
+ofiles = main.o FitnessFunction.o GA.o RandomGenerator.o
 # environment
 LESSOPEN = | /usr/bin/lesspipe %s
 # environment
@@ -46,10 +48,12 @@ VSCODE_CWD = /mnt/c/Users/User/AppData/Local/Programs/Microsoft VS Code
 MAKE_HOST := x86_64-pc-linux-gnu
 # environment
 PATH = /home/timothy/.vscode-server/bin/da76f93349a72022ca4670c1b84860304616aaa2/bin/remote-cli:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/mnt/c/Program Files (x86)/Common Files/Oracle/Java/javapath:/mnt/c/ProgramData/Oracle/Java/javapath:/mnt/c/Windows/system32:/mnt/c/Windows:/mnt/c/Windows/System32/Wbem:/mnt/c/Windows/System32/WindowsPowerShell/v1.0/:/mnt/c/Windows/System32/OpenSSH/:/mnt/c/Program Files/NVIDIA Corporation/NVIDIA NvDLISR:/mnt/c/Program Files (x86)/NVIDIA Corporation/PhysX/Common:/mnt/c/Program Files/Git/cmd:/mnt/c/Program Files/dotnet/:/mnt/c/Users/User/AppData/Local/Microsoft/WindowsApps:/mnt/c/Users/User/AppData/Local/Programs/Microsoft VS Code/bin:/mnt/c/Users/User/AppData/Local/GitHubDesktop/bin:/mnt/c/Users/User/.dotnet/tools:/snap/bin
+# makefile (from 'makefile', line 2)
+gpp_o = g++ -c -std=c++98
 # environment
 ELECTRON_RUN_AS_NODE = 1
 # environment
-VSCODE_IPC_HOOK_CLI = /tmp/vscode-ipc-2321fbe3-8007-475d-8fab-4ac57f3a797c.sock
+VSCODE_IPC_HOOK_CLI = /tmp/vscode-ipc-3af2311c-593b-4497-9eac-a74f955ff5de.sock
 # default
 .FEATURES := target-specific order-only second-expansion else-if shortest-stem undefine oneshell archives jobserver output-sync check-symlink load
 # environment
@@ -57,7 +61,7 @@ LS_COLORS = rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:
 # automatic
 %F = $(notdir $%)
 # environment
-PWD = /mnt/c/Users/User/Desktop/Tuks/2nd Semester/COS 110/COS110_Pracs/COS110 C++
+PWD = /mnt/c/Users/User/Desktop/Tuks/2nd Semester/COS 110/COS110_Pracs/COS110 C++/Assignment1
 # default
 .LOADED := 
 # environment
@@ -87,7 +91,7 @@ MAKE_VERSION := 4.2.1
 # environment
 USER = timothy
 # makefile
-.DEFAULT_GOAL := 
+.DEFAULT_GOAL := main
 # environment
 NAME = MyPc
 # automatic
@@ -135,7 +139,7 @@ TERM = xterm-256color
 # environment
 WSL_DISTRO_NAME = Ubuntu-20.04
 # variable set hash-table stats:
-# Load=62/1024=6%, Rehash=0, Collisions=4/84=5%
+# Load=64/1024=6%, Rehash=0, Collisions=4/90=4%
 
 # Pattern-specific Variable Values
 
@@ -143,15 +147,21 @@ WSL_DISTRO_NAME = Ubuntu-20.04
 
 # Directories
 
-# . (device 14, inode 66709569480474777): 6 files, no impossibilities.
+# . (device 14, inode 41095346599902316): 13 files, no impossibilities.
 
-# 6 files, no impossibilities in 1 directories.
+# 13 files, no impossibilities in 1 directories.
 
 # Implicit Rules
 
 # No implicit rules.
 
 # Files
+
+# Not a target:
+Chromosone.h:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
 
 # Not a target:
 all:
@@ -161,18 +171,35 @@ all:
 #  File has not been updated.
 
 # Not a target:
-Makefile:
-#  Implicit rule search has been done.
-#  File does not exist.
-#  File has been updated.
-#  Failed to be updated.
+FitnessFunction.h:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+GA.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+RandomGenerator.h:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
 
 # Not a target:
 makefile:
 #  Implicit rule search has been done.
-#  File does not exist.
+#  Last modified 2022-08-10 18:11:42.8809201
 #  File has been updated.
-#  Failed to be updated.
+#  Successfully updated.
+
+# Not a target:
+main.cpp:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
 
 # Not a target:
 .DEFAULT:
@@ -181,27 +208,52 @@ makefile:
 #  File has not been updated.
 
 # Not a target:
-GNUmakefile:
-#  Implicit rule search has been done.
-#  File does not exist.
-#  File has been updated.
-#  Failed to be updated.
+FitnessFunction.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+GA.h:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+main: main.o FitnessFunction.o GA.o RandomGenerator.o
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (from 'makefile', line 5):
+	g++ -std=c++98 $(ofiles) -o main
+
+main.o: main.cpp Chromosone.h FitnessFunction.h GA.h RandomGenerator.h
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (from 'makefile', line 8):
+	$(gpp_o) main.cpp
+
+# Not a target:
+RandomGenerator.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
 
 # files hash-table stats:
-# Load=6/1024=1%, Rehash=0, Collisions=0/15=0%
+# Load=14/1024=1%, Rehash=0, Collisions=0/34=0%
 # VPATH Search Paths
 
 # No 'vpath' search paths.
 
 # No general ('VPATH' variable) search path.
 
-# strcache buffers: 1 (0) / strings = 14 / storage = 122 B / avg = 8 B
-# current buf: size = 8162 B / used = 122 B / count = 14 / avg = 8 B
+# strcache buffers: 1 (0) / strings = 24 / storage = 270 B / avg = 11 B
+# current buf: size = 8162 B / used = 270 B / count = 24 / avg = 11 B
 
-# strcache performance: lookups = 17 / hit rate = 17%
+# strcache performance: lookups = 35 / hit rate = 31%
 # hash-table stats:
-# Load=14/8192=0%, Rehash=0, Collisions=1/17=6%
-# Finished Make data base on Wed Aug 10 19:25:29 2022
+# Load=24/8192=0%, Rehash=0, Collisions=1/35=3%
+# Finished Make data base on Wed Aug 10 18:39:19 2022
 
  
 make: *** No rule to make target 'all'.  Stop.
