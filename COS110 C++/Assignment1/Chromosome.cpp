@@ -1,38 +1,40 @@
 #include "Chromosome.h"
+#include "FitnessFunction.h"
+#include "RandomGenerator.h"
 #include <string>
 Chromosome::Chromosome(int numGenes, RandomGenerator* rand)
 {
-    bool* genes = new bool[numGenes];
+    if(numGenes < 0)
+        this->numGenes = 0;
+    else
+        this->numGenes = numGenes;
+    genes = new bool[this->numGenes];
     if(rand == NULL)
     {
-        for(int i = 0; i < numGenes; i++)
+        for(int i = 0; i < this->numGenes; i++)
         {
             genes[i] = false;
         }
     }
     else
     {
-        for(int i = 0; i < numGenes; i++)
+        for(int i = 0; i < this->numGenes; i++)
         {
             genes[i] = rand->randomBool();
         }
     }
-    if(numGenes < 0)
-        this->numGenes = 0;
-    else
-        this->numGenes = numGenes;
 }
 Chromosome::Chromosome(Chromosome* chromosome)
 {
     if(chromosome == NULL)
     {
         this->numGenes = 0;
-        bool* genes = new bool[0];
+        genes = new bool[0];
     }
     else
     {
-        bool* genes = new bool[numGenes];
         this->numGenes = chromosome->getNumGenes();
+        genes = new bool[numGenes];
 
         for(int i = 0; i < this->numGenes; i++)
         {
@@ -50,14 +52,13 @@ Chromosome::Chromosome(bool* genes, int numGenes)
     else
     {
         this->numGenes = numGenes;
-        bool* genes = new bool[numGenes];
+        this->genes = new bool[numGenes];
         if(genes == NULL)
         {
             for (int i = 0; i < numGenes; i++)
             {
                 this->genes[i] = false;
             }
-            
         }
         else
         {
@@ -74,7 +75,7 @@ Chromosome::~Chromosome()
 }
 double Chromosome::fitness(FitnessFunction* fitnessFunction, Chromosome* chromosome, int numGenes)
 {
-    if(fitnessFunction == NULL || numGenes <=0)
+    if(fitnessFunction == NULL || chromosome == NULL || numGenes <=0)
     {
         return 0;
     }
@@ -86,23 +87,29 @@ int Chromosome::getNumGenes()
 }
 Chromosome* Chromosome::crossOver(Chromosome* c2)
 {
-    if(c2 == NULL)
+    double crossOverPoint = 0;
+    if(c2 == NULL || c2->getNumGenes() <= 0)
     {
-        return this;
+        Chromosome* tempChromosome = new Chromosome(this);
+        return tempChromosome;
     }
-    double crossOverPoint = floor(c2->getNumGenes()/2);
-    bool* nGenes = new bool[numGenes];
-    for (int i = 0; i < crossOverPoint; i++)
+    else
     {
-        nGenes[i] = this->genes[i];
+        crossOverPoint = floor(c2->getNumGenes()/2);
+        bool* nGenes = new bool[numGenes];
+        for (int i = 0; i < crossOverPoint; i++)
+        {
+            nGenes[i] = this->genes[i];
+        }
+        for (int i = crossOverPoint; i < numGenes; i++)
+        {
+            nGenes[i] = c2->genes[i];
+        }
+        Chromosome* c3 = new Chromosome(nGenes, numGenes);
+        delete [] nGenes;
+        return c3;
     }
-    for (int i = crossOverPoint; i < numGenes; i++)
-    {
-        nGenes[i] = c2->genes[i];
-    }
-    Chromosome* c3 = new Chromosome(nGenes, numGenes);
-    delete [] nGenes;
-    return c3;
+    
 }
 Chromosome* Chromosome::mutate()
 {
@@ -129,11 +136,11 @@ std::string Chromosome::toString()
     {
         if(genes[i] == true)
         {
-            out + "1";
+            out += "1";
         }
         else
         {
-            out + "0";
+            out += "0";
         }
     }
     return out;

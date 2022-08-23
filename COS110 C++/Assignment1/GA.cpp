@@ -1,10 +1,14 @@
 #include "GA.h"
-
+#include "Chromosome.h"
+#include "RandomGenerator.h"
+#include "FitnessFunction.h"
+#include <string>
+#include <iostream>
 GA::GA(int populationSize, RandomGenerator* rand, int numGenes, int selectionSize)
 {
     this->populationSize = populationSize;
     this->selectionSize = selectionSize;
-    Chromosome** population = new Chromosome*[populationSize];
+    population = new Chromosome*[populationSize];
     for (int i = 0; i < populationSize; i++)
     {
         population[i] = new Chromosome(numGenes, rand);
@@ -12,10 +16,20 @@ GA::GA(int populationSize, RandomGenerator* rand, int numGenes, int selectionSiz
 }
 GA::GA(GA* geneticAlgorithm)
 {
-    
+    this->populationSize = geneticAlgorithm->populationSize;
+    this->selectionSize = geneticAlgorithm->selectionSize;
+    population = new Chromosome*[populationSize];
+    for (int i = 0; i < populationSize; i++)
+    {
+        population[i] = new Chromosome(geneticAlgorithm->population[i]);
+    }
 }
 GA::~GA()
 {
+    for (int i = 0; i < populationSize; i++)
+    {
+        delete population[i];
+    }
     delete [] population;
 }
 Chromosome** GA::selection(FitnessFunction* fitnessFunction)
@@ -25,15 +39,15 @@ Chromosome** GA::selection(FitnessFunction* fitnessFunction)
     {
         selection[i] = new Chromosome(population[i]);
     }
-    for (int i = 0; i < populationSize; i++)
+    for (int i = 0; i < populationSize-1; i++)
     {
-        for (int j = i + 1; j < populationSize; j++)
+        for (int j = 0; j < populationSize-i-1; j++)
         {
-            if(fitnessFunction->calculateFitness(selection[i], selection[i]->getNumGenes()) < fitnessFunction->calculateFitness(selection[j], selection[i]->getNumGenes()))
+            if(selection[j]->fitness(fitnessFunction,selection[j],selection[j]->getNumGenes()) < selection[j+1]->fitness(fitnessFunction,selection[j+1],selection[j+1]->getNumGenes()))
             {
-                Chromosome* temp = selection[i];
-                selection[i] = selection[j];
-                selection[j] = temp;
+                Chromosome* temp = selection[j];
+                selection[j] = selection[j+1];
+                selection[j+1] = temp;
             }
         }
     }
@@ -46,15 +60,15 @@ Chromosome** GA::inverseSelection(FitnessFunction* fitnessFunction)
     {
         inverseSelection[i] = new Chromosome(population[i]);
     }
-    for (int i = 0; i < populationSize; i++)
+    for (int i = 0; i < populationSize-1; i++)
     {
-        for (int j = i + 1; j < populationSize; j++)
+        for (int j = 0; j < populationSize-i-1; j++)
         {
-            if(fitnessFunction->calculateFitness(inverseSelection[i], inverseSelection[i]->getNumGenes()) >= fitnessFunction->calculateFitness(inverseSelection[j], inverseSelection[i]->getNumGenes()))
+            if(inverseSelection[j]->fitness(fitnessFunction,inverseSelection[j],inverseSelection[j]->getNumGenes()) > inverseSelection[j+1]->fitness(fitnessFunction,inverseSelection[j+1],inverseSelection[j+1]->getNumGenes()))
             {
-                Chromosome* temp = inverseSelection[i];
-                inverseSelection[i] = inverseSelection[j];
-                inverseSelection[j] = temp;
+                Chromosome* temp = inverseSelection[j];
+                inverseSelection[j] = inverseSelection[j+1];
+                inverseSelection[j+1] = temp;
             }
         }
     }
@@ -76,9 +90,9 @@ double GA::calculateAvgAccuracy(FitnessFunction* fitnessFunction)
     double avgFitness = 0;
     for(int i = 0; i < populationSize; i++)
     {
-        avgFitness += fitnessFunction->calculateFitness(population[i], population[i]->getNumGenes());
+        avgFitness += Chromosome::fitness(fitnessFunction,population[i],population[i]->getNumGenes());
     }
-    avgFitness /= populationSize;
+    avgFitness /= (double)populationSize;
     return avgFitness;
 }
 double GA::calculateStd(FitnessFunction* fitnessFunction)
@@ -87,9 +101,9 @@ double GA::calculateStd(FitnessFunction* fitnessFunction)
     double std = 0;
     for(int i = 0; i < populationSize; i++)
     {
-        std += pow(fitnessFunction->calculateFitness(population[i], population[i]->getNumGenes()) - avgFitness, 2);
+        std += pow((Chromosome::fitness(fitnessFunction,population[i],population[i]->getNumGenes()) - avgFitness), 2);
     }
-    std = sqrt(std/populationSize);
+    std = sqrt(std/(double)populationSize);
     return std;
 }
 double GA::calculateVariance()
@@ -98,21 +112,20 @@ double GA::calculateVariance()
     for (int i = 0; i < populationSize; i++)
     {
         bool isCopy = false;
-        for (int j = 0; i < populationSize; i++)
+        for (int j = 0; j < i; j++)
         {
             if(population[i]->toString() == population[j]->toString())
                 isCopy = true;
         }
-        if(isCopy)
+        if(!isCopy)
             uniqueChromosomes++;
     }
-    return uniqueChromosomes/populationSize;
+    return (uniqueChromosomes/ (double) populationSize);
 }
 void GA::setPopulation(Chromosome** p)
 {
     for (int i = 0; i < populationSize; i++)
     {
-        delete population[i];
         population[i] = new Chromosome(p[i]);
     }
 }
@@ -126,47 +139,56 @@ Chromosome** GA::run(FitnessFunction* fitnessFunction)
     for(int i = 0; i < selectionSize*2; i++)
     {
         nChromosomes = crossOver(winners[i], winners[i+1]);
-        offsprings[i] = nChromosomes[0];
-        offsprings[i+1] = nChromosomes[1];
+        offsprings[i] = new Chromosome(nChromosomes[0]);
+        offsprings[i+1] = new Chromosome(nChromosomes[1]);
+        i++;
     }
+    delete nChromosomes[0];
+    delete nChromosomes[1];
+    delete [] nChromosomes;
     for (int i = 0; i < selectionSize; i++)
     {
-        offsprings[i + 2*selectionSize] = winners[i+2*selectionSize]->mutate();
+        offsprings[i + 2*selectionSize] = mutate(winners[i+2*selectionSize]);
     }
     for (int i = 0; i < populationSize; i++)
     {
         P[i] = population[i];
     }
-    
     for (int i = 0; i < 3*selectionSize; i++)
     {
         Chromosome* dyingChromosome = new Chromosome(losers[i]);
-        for (int j = 0; j < populationSize; j++)
+        bool isFound = false;
+        int u = 0;
+        while(!isFound && u < populationSize)
         {
-            if(dyingChromosome->toString() == P[j]->toString())
+            if(dyingChromosome->toString() == P[u]->toString())
             {
-                P[j] = offsprings[i];
+                isFound = true;
+                P[u] = new Chromosome(offsprings[i]);
             }
+            u++;
         }
+        delete offsprings[i];
     }
+    for (int i = 0; i < populationSize; i++)
+    {
+        delete winners[i];
+        delete losers[i];
+    }
+    
     delete [] winners;
     delete [] losers;
     delete [] offsprings;
-    delete [] nChromosomes;
     return P;
-    
 }
 double** GA::run(FitnessFunction* fitnessFunction, int numGenerations)
 {
     double** results = new double*[numGenerations];
     for (int i = 0; i < numGenerations; i++)
     {
-        results[i] = new double[2];
-    }
-    for (int i = 0; i < numGenerations; i++)
-    {
-        Chromosome** P = run(fitnessFunction);
-        population = P;
+        Chromosome** p = run(fitnessFunction);
+        setPopulation(p);
+        results[i] = new double[3];
         results[i][0] = calculateAvgAccuracy(fitnessFunction);
         results[i][1] = calculateStd(fitnessFunction);
         results[i][2] = calculateVariance();

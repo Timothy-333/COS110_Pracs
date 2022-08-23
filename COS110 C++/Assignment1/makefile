@@ -1,4 +1,4 @@
-ofiles = main.o FitnessFunction.o GA.o RandomGenerator.o
+ofiles = main.o FitnessFunction.o GA.o RandomGenerator.o Chromosome.o
 gpp_o = g++ -c -std=c++98
 
 main: $(ofiles)
@@ -10,7 +10,7 @@ main.o: main.cpp Chromosome.h FitnessFunction.h GA.h RandomGenerator.h
 Chromosome.o: Chromosome.cpp Chromosome.h FitnessFunction.h RandomGenerator.h
 	$(gpp_o) Chromosome.cpp
 
-FitnessFunction.o: FitnessFunction.cpp FitnessFunction.h RandomGenerator.h
+FitnessFunction.o: FitnessFunction.cpp FitnessFunction.h
 	$(gpp_o) FitnessFunction.cpp
 
 GA.o: GA.cpp GA.h FitnessFunction.h RandomGenerator.h Chromosome.h

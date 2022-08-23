@@ -13,7 +13,7 @@ double avg(double** arr, int d, int size) {
     for (int i = 0; i < size; i++) {
         sum += arr[i][d];
     }
-    return sum / size;
+    return sum / (double)size;
 }
 
 void benchMark(int numGenerations, int popSize, int selectionSize, int numGenes, long seed, bool generationResults, bool timeResults) {
@@ -63,7 +63,7 @@ void studentMain() {
         p[i] = new Chromosome(arr, 10);
         delete[] arr;
     }
-    RandomGenerator* rand = new RandomGenerator(12345);
+    RandomGenerator* rand = new RandomGenerator(54321);
     FitnessFunction* fitnessFunction = new FitnessFunction();
     GA* ga = new GA(10, rand, 10, 1);
     ga->setPopulation(p);
@@ -79,14 +79,15 @@ void studentMain() {
     cout << ga->calculateAvgAccuracy(fitnessFunction) << endl;
     cout << ga->calculateStd(fitnessFunction) << endl;
     cout << ga->calculateVariance() << endl;
-    for (int i = 0; i < 10; i++) {
+    for (int i = 0; i < 10; i++)
+    {
         delete p[i];
     }
     delete[] p;
     delete ga;
     delete rand;
     delete fitnessFunction;
-    benchMark(10, 10, 1, 10, 500, true, false);
+    benchMark(100,100,5,10,1,true,true);
 }
 int main()
 {
