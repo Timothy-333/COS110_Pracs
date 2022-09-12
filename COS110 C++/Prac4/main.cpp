@@ -13,7 +13,6 @@ using namespace std;
 
 int main()
 {
-
 	Phase1::runTest();
 //	Phase2::runTest();
 
