@@ -12,7 +12,7 @@ class CountArray : public TwoDArray
     public:
         CountArray(int**,int*,int);
         ~CountArray();
-        virtual int* operator[](int);
+        int* operator[](int);
 };
 
 #endif

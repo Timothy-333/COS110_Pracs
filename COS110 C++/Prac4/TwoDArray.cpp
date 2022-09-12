@@ -9,13 +9,11 @@ TwoDArray::TwoDArray(int** array, int* sizes, int baseSize)
     {
         this->sizes[i] = sizes[i];
         this->array[i] = new int[sizes[i]];
-        for (size_t j = 0; j < sizes[i]; j++)
+        for (int j = 0; j < sizes[i]; j++)
         {
             this->array[i][j] = array[i][j];
         }
-        
     }
-    
 }
 TwoDArray::~TwoDArray()
 {

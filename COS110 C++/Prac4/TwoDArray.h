@@ -27,6 +27,6 @@ public:
     operator int**();
     operator int*();
     operator int();
-    virtual int* operator[](int i) = 0;
+    virtual int* operator[](int) = 0;
 };
 #endif
