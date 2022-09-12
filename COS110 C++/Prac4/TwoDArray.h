@@ -2,7 +2,7 @@
 
 //# directives....
 #ifndef TWODARRAY_H
-#define TWODArray_H
+#define TWODARRAY_H
 //Do not add any more #includes
 #include <iostream>
 #include <string>

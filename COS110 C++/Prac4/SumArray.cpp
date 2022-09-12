@@ -6,6 +6,15 @@ SumArray::SumArray(int** a, int* r, int c) : TwoDArray(a,r,c)
     sizes = getSizes();
     baseSize = getBaseSize();
 }
+SumArray::~SumArray()
+{
+    for (int i = 0; i < baseSize; i++)
+    {
+        delete[] array[i];
+    }
+    delete[] array;
+    delete[] sizes;
+}
 int* SumArray::operator[](int i)
 {
     int* sum = new int;

@@ -13,51 +13,51 @@ namespace Phase1 {
 
 	void runTest()
 	{
-		const int size = 3;
+	// 	const int size = 3;
 
-		int** array = new int*[size];
-		int* sizes = new int[size];
+	// 	int** array = new int*[size];
+	// 	int* sizes = new int[size];
 
-		int count = 0;
+	// 	int count = 0;
 
-		//Create array
-		for (int i=0;i<size;i++)
-		{
-			sizes[i] = size;
-			array[i] = new int[size];
+	// 	//Create array
+	// 	for (int i=0;i<size;i++)
+	// 	{
+	// 		sizes[i] = size;
+	// 		array[i] = new int[size];
 
-			for (int k=0;k<sizes[i];k++)
-			{
-				array[i][k] = count++;
-			}
-		}
+	// 		for (int k=0;k<sizes[i];k++)
+	// 		{
+	// 			array[i][k] = count++;
+	// 		}
+	// 	}
 
-		//Constructor call
-		TwoDArray tester(array, sizes, size);
+	// 	//Constructor call
+	// 	TwoDArray tester(array, sizes, size);
 
-		//Test operator<<
-		cout<<"Contents:\n"<<tester<<endl;
+	// 	//Test operator<<
+	// 	cout<<"Contents:\n"<<tester<<endl;
 
 
-		//Test conversion overloads
-		int** othArray = tester;
-		int* othSizes = tester;
-		int othSize = tester;
+	// 	//Test conversion overloads
+	// 	int** othArray = tester;
+	// 	int* othSizes = tester;
+	// 	int othSize = tester;
 
-		cout<<"Contents of copied array:"<<endl;
-		for (int i=0;i<othSize;i++)
-		{
-			for (int k=0;k<othSizes[i];k++)
-				cout<<othArray[i][k]<<" ";
-			cout<<endl;
-		}
+	// 	cout<<"Contents of copied array:"<<endl;
+	// 	for (int i=0;i<othSize;i++)
+	// 	{
+	// 		for (int k=0;k<othSizes[i];k++)
+	// 			cout<<othArray[i][k]<<" ";
+	// 		cout<<endl;
+	// 	}
 
-		for (int i=0;i<size;i++)
-		{
-			delete [] array[i];
-		}
-		delete [] array;
-		delete [] sizes;
+	// 	for (int i=0;i<size;i++)
+	// 	{
+	// 		delete [] array[i];
+	// 	}
+	// 	delete [] array;
+	// 	delete [] sizes;
 
 	}
 

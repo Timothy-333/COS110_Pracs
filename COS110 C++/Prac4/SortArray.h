@@ -12,7 +12,7 @@ class SortArray : public TwoDArray
     public:
         SortArray(int**,int*,int);
         ~SortArray();
-        int* operator[](int);
+        virtual int* operator[](int);
 };
 
 #endif

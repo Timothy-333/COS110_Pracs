@@ -6,7 +6,7 @@
 #include <cstdlib>
 
 #include "Task1.cpp"
-//#include "Task2.cpp"
+#include "Task2.cpp"
 
 
 using namespace std;
@@ -14,7 +14,7 @@ using namespace std;
 int main()
 {
 	Phase1::runTest();
-//	Phase2::runTest();
+	Phase2::runTest();
 
 	return 0;
 }

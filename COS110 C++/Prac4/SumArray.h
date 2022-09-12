@@ -12,7 +12,7 @@ class SumArray : public TwoDArray
     public:
         SumArray(int**,int*,int);
         ~SumArray();
-        int* operator[](int);
+        virtual int* operator[](int);
 };
 
 #endif

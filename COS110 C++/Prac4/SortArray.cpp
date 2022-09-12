@@ -6,6 +6,15 @@ SortArray::SortArray(int** a, int* r, int c) : TwoDArray(a,r,c)
     sizes = getSizes();
     baseSize = getBaseSize();
 }
+SortArray::~SortArray()
+{
+    for (int i = 0; i < baseSize; i++)
+    {
+        delete[] array[i];
+    }
+    delete[] array;
+    delete[] sizes;
+}
 int* SortArray::operator[](int i)
 {
     int* temp = new int[sizes[i]];
