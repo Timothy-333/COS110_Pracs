@@ -1,5 +1,4 @@
 #include "TwoDArray.h"
-using namespace std;
 TwoDArray::TwoDArray(int** array, int* sizes, int baseSize)
 {
     this->array = new int*[baseSize];
@@ -24,22 +23,22 @@ TwoDArray::~TwoDArray()
     delete[] array;
     delete[] sizes;
 }
-ostream& operator<<(std::ostream& os, TwoDArray& tda)
+std::ostream& operator<<(std::ostream& os, TwoDArray& tda)
 {
-    for (int i = 0; i < tda.baseSize; i++)
+    for (int i = 0; i < tda.getBaseSize(); i++)
     {
-        for (int j = 0; j < tda.sizes[i]; j++)
+        for (int j = 0; j < tda.getSizes()[i]; j++)
         {
-            if (j != tda.sizes[i] - 1)
+            if (j != tda.getSizes()[i] - 1)
             {
-                os << tda.array[i][j] << " ";
+                os << tda.getArray()[i][j] << " ";
             }
             else
             {
-                os << tda.array[i][j];
+                os << tda.getArray()[i][j];
             }
         }
-        os << endl;
+        os << std::endl;
     }
     return os;
 }

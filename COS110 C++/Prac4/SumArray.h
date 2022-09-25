@@ -3,15 +3,10 @@
 
 #include "TwoDArray.h"
 
-class SumArray : public TwoDArray
+class SumArray : TwoDArray
 {
-    private:
-        int** array;
-        int* sizes;
-        int baseSize;
     public:
         SumArray(int**,int*,int);
-        ~SumArray();
         int* operator[](int);
 };
 

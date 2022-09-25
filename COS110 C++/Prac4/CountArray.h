@@ -3,15 +3,10 @@
 
 #include "TwoDArray.h"
 
-class CountArray : public TwoDArray
+class CountArray : TwoDArray
 {
-    private:
-        int** array;
-        int* sizes;
-        int baseSize;
     public:
         CountArray(int**,int*,int);
-        ~CountArray();
         int* operator[](int);
 };
 
