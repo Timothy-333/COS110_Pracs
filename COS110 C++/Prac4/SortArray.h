@@ -3,10 +3,15 @@
 
 #include "TwoDArray.h"
 
-class SortArray : TwoDArray
+class SortArray : public TwoDArray
 {
+    private:
+        int** array;
+        int* sizes;
+        int baseSize;
     public:
         SortArray(int**,int*,int);
+        ~SortArray();
         int* operator[](int);
 };
 

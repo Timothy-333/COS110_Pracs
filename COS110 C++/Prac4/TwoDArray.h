@@ -1,12 +1,14 @@
 //The base 2D array class
 
 //# directives....
-#ifndef TwoDArray_H
-#define TwoDArray_H
+#ifndef TWODARRAY_H
+#define TWODARRAY_H
 //Do not add any more #includes
 #include <iostream>
 #include <string>
 
+class TwoDArray;
+std::ostream& operator<<(std::ostream& os, TwoDArray& tda);
 //Define class below
 class TwoDArray
 {
@@ -14,6 +16,10 @@ private:
     int** array;
     int* sizes;
     int baseSize;
+protected:
+    int** getArray();
+    int* getSizes();
+    int getBaseSize();
 public:
     TwoDArray(int**,int*,int);
     ~TwoDArray();
@@ -21,9 +27,6 @@ public:
     operator int**();
     operator int*();
     operator int();
-protected:
-    int** getArray();
-    int* getSizes();
-    int getBaseSize();
+    virtual int* operator[](int) = 0;
 };
 #endif
