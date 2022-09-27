@@ -86,26 +86,72 @@ bool TesterInterface::removeTester(int index)
 }
 bool TesterInterface::evaluate(int value)
 {
-    return false;
+    if (testers == nullptr)
+    {
+        return false;
+    }
+    for (int i = 0; i < currNumTesters; i++)
+    {
+        if (testers[i] != nullptr)
+        {
+            if (testers[i]->evaluate(value) == false)
+            {
+                return false;
+            }
+        }
+    }
+    return true;
+    
 }
 int* TesterInterface::failedTests(int value)
 {
-    return nullptr;
+    int* failedTests = new int[currNumTesters];
+    int count = 0;
+    for (int i = 0; i < currNumTesters; i++)
+    {
+        if (testers[i] != nullptr)
+        {
+            if (testers[i]->evaluate(value) == false)
+            {
+                failedTests[count] = i;
+                count++;
+            }
+        }
+    }
+    return failedTests;
 }
 int TesterInterface::numberOfFailedTests(int value)
 {
-    return 0;
+    int count = 0;
+    for (int i = 0; i < currNumTesters; i++)
+    {
+        if (testers[i] != nullptr)
+        {
+            if (testers[i]->evaluate(value) == false)
+            {
+                count++;
+            }
+        }
+    }
+    return count;
 }
 NumberTester* TesterInterface::operator[](int index)
 {
+    if (index >= 0 && index < maxNumTesters)
+    {
+        if (testers[index] != nullptr)
+        {
+            return testers[index];
+        }
+    }
     return nullptr;
 }
 const int TesterInterface::getCurrNumTesters()
 {
-    return 0;
+    return currNumTesters;
 }
 const int TesterInterface::getMaxNumTesters()
 {
-    return 0;
+    return maxNumTesters;
 }
 
