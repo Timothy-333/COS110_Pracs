@@ -2,6 +2,7 @@
 
 IsPrimeNumber::IsPrimeNumber(): ValueIndependantTester()
 {
+    numAliveObjects++;
 }
 IsPrimeNumber::~IsPrimeNumber()
 {
@@ -22,5 +23,5 @@ NumberTester* IsPrimeNumber::clone()
 }
 int IsPrimeNumber::getNumAliveObjects()
 {
-    return numAliveObjects;
+    return getNumAliveObjects();
 }

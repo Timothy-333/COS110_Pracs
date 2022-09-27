@@ -18,5 +18,5 @@ NumberTester* IsEvenOdd::clone()
 }
 int IsEvenOdd::getNumAliveObjects()
 {
-    return numAliveObjects;
+    return getNumAliveObjects();
 }

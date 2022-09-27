@@ -1,6 +1,6 @@
 #include "ValueIndependantTester.h"
 
-ValueIndependantTester::ValueIndependantTester()
+ValueIndependantTester::ValueIndependantTester(): NumberTester()
 {
     numAliveObjects++;
 }
@@ -10,6 +10,6 @@ ValueIndependantTester::~ValueIndependantTester()
 }
 int ValueIndependantTester::getNumAliveObjects()
 {
-    return numAliveObjects;
+    return getNumAliveObjects();
 }
 

@@ -7,8 +7,8 @@ class NumberTester
 public:
     NumberTester(/* args */);
     ~NumberTester();
-    virtual bool evaluate(int);
-    virtual NumberTester* clone();
+    virtual bool evaluate(int)=0;
+    virtual NumberTester* clone()=0;
     static int getNumAliveObjects();
 };
 #endif

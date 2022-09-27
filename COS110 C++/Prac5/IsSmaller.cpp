@@ -18,5 +18,5 @@ NumberTester* IsSmaller::clone()
 }
 int IsSmaller::getNumAliveObjects()
 {
-    return numAliveObjects;
+    return getNumAliveObjects();
 }

@@ -1,6 +1,7 @@
 #ifndef TesterInterface_h
 #define TesterInterface_h
 #include "NumberTester.h"
+#include <cstddef>
 class TesterInterface
 {
 private:

@@ -1,4 +1,4 @@
-ofiles = main.o TesterInterface.o NumberTester.o ValueDependantTester.o ValueIndependantTester.o IsDivisable.o IsEvenOdd.o
+ofiles = main.o TwoDArray.o SumArray.o CountArray.o SortArray.o
 gpp_o = g++ -c -std=c++98
 
 main: $(ofiles)
@@ -7,32 +7,18 @@ main: $(ofiles)
 main.o: main.cpp
 	$(gpp_o) main.cpp
 
-TesterInterface.o: TesterInterface.cpp TesterInterface.h
-	$(gpp_o) TesterInterface.cpp
+TwoDArray.o: TwoDArray.cpp TwoDArray.h
+	$(gpp_o) TwoDArray.cpp
 
-ValueDependantTester.o: ValueDependantTester.cpp ValueDependantTester.h IsEvenOdd.h
-	$(gpp_o) ValueDependantTester.cpp
+SumArray.o: SumArray.cpp SumArray.h TwoDArray.h
+	$(gpp_o) SumArray.cpp
 
-ValueIndependantTester.o: ValueIndependantTester.cpp ValueIndependantTester.h IsEvenOdd.h
-	$(gpp_o) ValueIndependantTester.cpp
+CountArray.o: CountArray.cpp CountArray.h TwoDArray.h
+	$(gpp_o) CountArray.cpp
 
-NumberTester.o: NumberTester.cpp NumberTester.h
-	$(gpp_o) NumberTester.cpp
+SortArray.o: SortArray.cpp SortArray.h TwoDArray.h
+	$(gpp_o) SortArray.cpp
 
-IsDivisable.o: IsDivisable.cpp IsDivisable.h
-	$(gpp_o) IsDivisable.cpp
-
-IsEvenOdd.o: IsEvenOdd.cpp IsEvenOdd.h
-	$(gpp_o) IsEvenOdd.cpp
-
-IsEvenOdd.o: IsEvenOdd.cpp IsEvenOdd.h
-	$(gpp_o) IsEvenOdd.cpp
-
-IsEvenOdd.o: IsEvenOdd.cpp IsEvenOdd.h
-	$(gpp_o) IsEvenOdd.cpp
-
-IsEvenOdd.o: IsEvenOdd.cpp IsEvenOdd.h
-	$(gpp_o) IsEvenOdd.cpp
 run: main
 	./main
 

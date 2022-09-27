@@ -10,7 +10,16 @@ IsDivisable::~IsDivisable()
 }
 bool IsDivisable::evaluate(int val)
 {
-    return val % value == 0;
+    if (value != 0)
+    {
+        return val % value == 0; 
+    }   
+    else
+    {
+        return false;
+    }
+    
+
 }
 NumberTester* IsDivisable::clone()
 {
@@ -18,6 +27,6 @@ NumberTester* IsDivisable::clone()
 }
 int IsDivisable::getNumAliveObjects()
 {
-    return numAliveObjects;
+    return getNumAliveObjects();
 }
 

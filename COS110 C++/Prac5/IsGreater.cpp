@@ -18,5 +18,5 @@ NumberTester* IsGreater::clone()
 }
 int IsGreater::getNumAliveObjects()
 {
-    return numAliveObjects;
+    return getNumAliveObjects();
 }
