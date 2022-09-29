@@ -7,8 +7,8 @@ class IsEvenOdd: public ValueIndependantTester
 public:
     IsEvenOdd();
     virtual ~IsEvenOdd();
-    virtual bool evaluate(int);
-    virtual NumberTester* clone();
+    bool evaluate(int);
+    NumberTester* clone();
     static int getNumAliveObjects();
 };
 #endif

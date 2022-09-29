@@ -7,8 +7,8 @@ class IsDivisable: public ValueDependantTester
 public:
     IsDivisable(int);
     virtual ~IsDivisable();
-    virtual bool evaluate(int);
-    virtual NumberTester* clone();
+    bool evaluate(int);
+    NumberTester* clone();
     static int getNumAliveObjects();
 };
 #endif

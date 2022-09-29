@@ -29,19 +29,28 @@ TesterInterface::TesterInterface(TesterInterface* other)
         this->currNumTesters = 0;
     }
     testers = new NumberTester*[maxNumTesters];
-    for (int i = 0; i < maxNumTesters; i++)
+    for (int i = 0; i < currNumTesters; i++)
     {
         this->testers[i] = other->testers[i]->clone();
     }
+    for (int i = currNumTesters; i < maxNumTesters; i++)
+    {
+        this->testers[i] = NULL;
+    }
+    
 }
 TesterInterface::TesterInterface(TesterInterface& other)
 {
     this->maxNumTesters = other.maxNumTesters;
     this->currNumTesters = other.currNumTesters;
     testers = new NumberTester*[maxNumTesters];
-    for (int i = 0; i < maxNumTesters; i++)
+    for (int i = 0; i < currNumTesters; i++)
     {
         this->testers[i] = other.testers[i]->clone();
+    }
+    for (int i = currNumTesters; i < maxNumTesters; i++)
+    {
+        this->testers[i] = NULL;
     }
 }
 TesterInterface::~TesterInterface()
@@ -63,7 +72,7 @@ int TesterInterface::addTester(NumberTester* tester)
             {
                 testers[i] = tester->clone();
                 currNumTesters++;
-                return 0;
+                return i;
             }
         }
     }
@@ -85,7 +94,7 @@ bool TesterInterface::removeTester(int index)
 }
 bool TesterInterface::evaluate(int value)
 {
-    if (testers == NULL)
+    if (testers == NULL || currNumTesters == 0)
     {
         return false;
     }

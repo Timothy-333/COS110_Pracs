@@ -18,8 +18,6 @@ bool IsDivisable::evaluate(int val)
     {
         return false;
     }
-    
-
 }
 NumberTester* IsDivisable::clone()
 {

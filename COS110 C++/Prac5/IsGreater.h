@@ -7,8 +7,8 @@ class IsGreater: public ValueDependantTester
 public:
     IsGreater(int);
     virtual ~IsGreater();
-    virtual bool evaluate(int);
-    virtual NumberTester* clone();
+    bool evaluate(int);
+    NumberTester* clone();
     static int getNumAliveObjects();
 };
 #endif

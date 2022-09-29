@@ -7,8 +7,8 @@ class IsSmaller: public ValueDependantTester
 public:
     IsSmaller(int);
     virtual ~IsSmaller();
-    virtual bool evaluate(int);
-    virtual NumberTester* clone();
+    bool evaluate(int);
+    NumberTester* clone();
     static int getNumAliveObjects();
 };
 #endif
