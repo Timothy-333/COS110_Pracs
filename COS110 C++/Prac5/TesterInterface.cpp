@@ -29,28 +29,29 @@ TesterInterface::TesterInterface(TesterInterface* other)
         this->currNumTesters = 0;
     }
     testers = new NumberTester*[maxNumTesters];
-    for (int i = 0; i < currNumTesters; i++)
+    for (int i = 0; i < maxNumTesters; i++)
     {
-        this->testers[i] = other->testers[i]->clone();
+        if (testers[i] != NULL)
+        {
+            this->testers[i] = other->testers[i]->clone();
+        }
+        else
+            this->testers[i] = NULL;
     }
-    for (int i = currNumTesters; i < maxNumTesters; i++)
-    {
-        this->testers[i] = NULL;
-    }
-    
 }
 TesterInterface::TesterInterface(TesterInterface& other)
 {
     this->maxNumTesters = other.maxNumTesters;
     this->currNumTesters = other.currNumTesters;
     testers = new NumberTester*[maxNumTesters];
-    for (int i = 0; i < currNumTesters; i++)
+    for (int i = 0; i < maxNumTesters; i++)
     {
-        this->testers[i] = other.testers[i]->clone();
-    }
-    for (int i = currNumTesters; i < maxNumTesters; i++)
-    {
-        this->testers[i] = NULL;
+        if (testers[i] != NULL)
+        {
+            this->testers[i] = other.testers[i]->clone();
+        }
+        else
+            this->testers[i] = NULL;
     }
 }
 TesterInterface::~TesterInterface()
@@ -98,7 +99,7 @@ bool TesterInterface::evaluate(int value)
     {
         return false;
     }
-    for (int i = 0; i < currNumTesters; i++)
+    for (int i = 0; i < maxNumTesters; i++)
     {
         if (testers[i] != NULL)
         {
@@ -115,7 +116,7 @@ int* TesterInterface::failedTests(int value)
 {
     int* failedTests = new int[currNumTesters];
     int count = 0;
-    for (int i = 0; i < currNumTesters; i++)
+    for (int i = 0; i < maxNumTesters; i++)
     {
         if (testers[i] != NULL)
         {
@@ -131,7 +132,7 @@ int* TesterInterface::failedTests(int value)
 int TesterInterface::numberOfFailedTests(int value)
 {
     int count = 0;
-    for (int i = 0; i < currNumTesters; i++)
+    for (int i = 0; i < maxNumTesters; i++)
     {
         if (testers[i] != NULL)
         {
