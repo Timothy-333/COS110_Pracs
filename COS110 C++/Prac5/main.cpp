@@ -3,7 +3,7 @@
 #include "ValueIndependantTester.h"
 #include "NumberTester.h"
 #include "IsEvenOdd.h"
-#include "IsDivisable.h"
+#include "IsDivisible.h"
 #include "IsSmaller.h"
 #include "IsGreater.h"
 #include "IsPrimeNumber.h"
@@ -34,14 +34,14 @@ int main()
     {
         cout << a << " is not an even number" << endl;
     }
-    IsDivisable* tester3 = new IsDivisable(b);
+    IsDivisible* tester3 = new IsDivisible(b);
     if(tester3->evaluate(a))
     {
-        cout << a << " is divisable by " << b << endl;
+        cout << a << " is Divisible by " << b << endl;
     }
     else
     {
-        cout << a << " is not divisable by " << b << endl;
+        cout << a << " is not Divisible by " << b << endl;
     }
     IsSmaller* tester4 = new IsSmaller(b);
     if(tester4->evaluate(a))

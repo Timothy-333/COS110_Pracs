@@ -1,12 +1,12 @@
-#ifndef IsDivisable_h
-#define IsDivisable_h
+#ifndef IsDivisible_h
+#define IsDivisible_h
 #include "ValueDependantTester.h"
 // static int numAliveObjects = 0;
-class IsDivisable: public ValueDependantTester
+class IsDivisible: public ValueDependantTester
 {
 public:
-    IsDivisable(int);
-    virtual ~IsDivisable();
+    IsDivisible(int);
+    virtual ~IsDivisible();
     bool evaluate(int);
     NumberTester* clone();
     static int getNumAliveObjects();

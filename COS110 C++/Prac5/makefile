@@ -1,10 +1,10 @@
-ofiles = main.o TesterInterface.o NumberTester.o ValueDependantTester.o ValueIndependantTester.o IsDivisable.o IsEvenOdd.o IsGreater.o IsSmaller.o IsPrimeNumber.o 
+ofiles = main.o TesterInterface.o NumberTester.o ValueDependantTester.o ValueIndependantTester.o IsDivisible.o IsEvenOdd.o IsGreater.o IsSmaller.o IsPrimeNumber.o 
 gpp_o = g++ -c -std=c++98
 
 main: $(ofiles)
 	g++ -std=c++98 $(ofiles) -o main
 
-main.o: main.cpp TesterInterface.h NumberTester.h ValueDependantTester.h ValueIndependantTester.h IsDivisable.h IsEvenOdd.h
+main.o: main.cpp TesterInterface.h NumberTester.h ValueDependantTester.h ValueIndependantTester.h IsDivisible.h IsEvenOdd.h
 	$(gpp_o) main.cpp
 
 TesterInterface.o: TesterInterface.cpp TesterInterface.h NumberTester.h
@@ -19,8 +19,8 @@ ValueDependantTester.o: ValueDependantTester.cpp ValueDependantTester.h NumberTe
 ValueIndependantTester.o: ValueIndependantTester.cpp ValueIndependantTester.h NumberTester.h
 	$(gpp_o) ValueIndependantTester.cpp
 
-IsDivisable.o: IsDivisable.cpp IsDivisable.h ValueDependantTester.h
-	$(gpp_o) IsDivisable.cpp
+IsDivisible.o: IsDivisible.cpp IsDivisible.h ValueDependantTester.h
+	$(gpp_o) IsDivisible.cpp
 
 IsEvenOdd.o: IsEvenOdd.cpp IsEvenOdd.h ValueIndependantTester.h
 	$(gpp_o) IsEvenOdd.cpp
