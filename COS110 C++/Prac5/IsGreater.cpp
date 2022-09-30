@@ -1,5 +1,5 @@
 #include "IsGreater.h"
-
+int IsGreater::numAliveObjects = 0;
 IsGreater::IsGreater(int val): ValueDependantTester(val)
 {
     numAliveObjects++;
@@ -18,5 +18,5 @@ NumberTester* IsGreater::clone()
 }
 int IsGreater::getNumAliveObjects()
 {
-    return getNumAliveObjects();
+    return numAliveObjects;
 }

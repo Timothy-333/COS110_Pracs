@@ -4,6 +4,8 @@
 // static int numAliveObjects = 0;
 class ValueDependantTester: public NumberTester
 {
+private:
+    static int numAliveObjects;
 protected:
     int value;
 public:

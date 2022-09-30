@@ -18,8 +18,8 @@ public:
     int* failedTests(int);
     int numberOfFailedTests(int);
     NumberTester* operator[](int);
-    const int getCurrNumTesters();
-    const int getMaxNumTesters();
+    int getCurrNumTesters() const;
+    int getMaxNumTesters() const;
     ~TesterInterface();
 };
 #endif

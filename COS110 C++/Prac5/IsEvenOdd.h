@@ -4,6 +4,8 @@
 // static int numAliveObjects = 0;
 class IsEvenOdd: public ValueIndependantTester
 {
+private:
+    static int numAliveObjects;
 public:
     IsEvenOdd();
     virtual ~IsEvenOdd();

@@ -14,8 +14,8 @@ int main()
 {
     cout << "Number of alive objects: " << NumberTester::getNumAliveObjects() << endl;
     IsPrimeNumber* tester = new IsPrimeNumber();
-    int a = 2;
-    int b = 1;
+    int a =54;
+    int b = 2;
     if(tester->evaluate(a))
     {
         cout << a << " is a prime number" << endl;
@@ -53,6 +53,8 @@ int main()
         cout << a << " is not smaller than " << b << endl;
     }
     IsGreater* tester5 = new IsGreater(b);
+    IsGreater* tester6 = new IsGreater(b);
+    cout << tester5->getNumAliveObjects() << endl;
     if(tester5->evaluate(a))
     {
         cout << a << " is greater than " << b << endl;
@@ -66,7 +68,19 @@ int main()
     testerInterface->addTester(tester2);
     testerInterface->addTester(tester3);
     testerInterface->addTester(tester4);
-    testerInterface->addTester(tester5);
+    cout << "Current number of testers: " << testerInterface->getCurrNumTesters() << endl;
+    cout << "Max number of testers: " << testerInterface->getMaxNumTesters() << endl;
+    TesterInterface* testerInterface2 = new TesterInterface(testerInterface);
+    cout << "Number of alive objects: " << NumberTester::getNumAliveObjects() << endl;
+    testerInterface2->addTester(tester5);
+    if(testerInterface[5].evaluate(a))
+    {
+        cout << a << " is greater than " << b << endl;
+    }
+    else
+    {
+        cout << a << " is not greater than " << b << endl;
+    }
     if(testerInterface->evaluate(a))
     {
         cout << a << " passed all tests" << endl;
@@ -76,6 +90,15 @@ int main()
         cout << a << " did not pass all tests" << endl;
     }
     cout << "Failed Tests: " << testerInterface->numberOfFailedTests(a) << endl;
+    if(testerInterface2->evaluate(7))
+    {
+        cout << 7 << " passed all tests" << endl;
+    }
+    else
+    {
+        cout << 7 << " did not pass all tests" << endl;
+    }
+    cout << "Failed Tests: " << testerInterface2->numberOfFailedTests(7) << endl;
     cout << "Number of alive objects: " << NumberTester::getNumAliveObjects() << endl;
     return 0;
 }

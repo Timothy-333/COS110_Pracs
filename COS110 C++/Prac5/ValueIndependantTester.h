@@ -4,6 +4,8 @@
 // static int numAliveObjects = 0;
 class ValueIndependantTester: public NumberTester
 {
+private:
+    static int numAliveObjects;
 public:
     ValueIndependantTester();
     virtual ~ValueIndependantTester();

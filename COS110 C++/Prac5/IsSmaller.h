@@ -4,6 +4,8 @@
 // static int numAliveObjects = 0;
 class IsSmaller: public ValueDependantTester
 {
+private:
+    static int numAliveObjects;
 public:
     IsSmaller(int);
     virtual ~IsSmaller();

@@ -1,6 +1,6 @@
 #include "IsPrimeNumber.h"
-
-IsPrimeNumber::IsPrimeNumber(): ValueIndependantTester()
+int IsPrimeNumber::numAliveObjects = 0;
+IsPrimeNumber::IsPrimeNumber()
 {
     numAliveObjects++;
 }
@@ -23,5 +23,5 @@ NumberTester* IsPrimeNumber::clone()
 }
 int IsPrimeNumber::getNumAliveObjects()
 {
-    return getNumAliveObjects();
+    return numAliveObjects;
 }

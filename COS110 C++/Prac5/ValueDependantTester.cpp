@@ -1,4 +1,5 @@
 #include "ValueDependantTester.h"
+int ValueDependantTester::numAliveObjects = 0;
 ValueDependantTester::ValueDependantTester(int val): NumberTester()
 {
     this->value = val;
@@ -10,5 +11,5 @@ ValueDependantTester::~ValueDependantTester()
 }
 int ValueDependantTester::getNumAliveObjects()
 {
-    return getNumAliveObjects();
+    return numAliveObjects;
 }

@@ -4,6 +4,8 @@
 // static int numAliveObjects = 0;
 class IsPrimeNumber: public ValueIndependantTester
 {
+private:
+    static int numAliveObjects;
 public:
     IsPrimeNumber();
     virtual ~IsPrimeNumber();

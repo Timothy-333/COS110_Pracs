@@ -1,6 +1,6 @@
 #include "IsEvenOdd.h"
-
-IsEvenOdd::IsEvenOdd(): ValueIndependantTester()
+int IsEvenOdd::numAliveObjects = 0;
+IsEvenOdd::IsEvenOdd()
 {
     numAliveObjects++;
 }
@@ -18,5 +18,5 @@ NumberTester* IsEvenOdd::clone()
 }
 int IsEvenOdd::getNumAliveObjects()
 {
-    return getNumAliveObjects();
+    return numAliveObjects;
 }

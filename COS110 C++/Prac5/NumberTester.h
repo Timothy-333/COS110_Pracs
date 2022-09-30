@@ -1,9 +1,10 @@
 #ifndef NumberTester_h
 #define NumberTester_h
 
-static int numAliveObjects = 0;
 class NumberTester
 {
+private:
+    static int numAliveObjects;
 public:
     NumberTester(/* args */);
     ~NumberTester();

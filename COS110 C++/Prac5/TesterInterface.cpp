@@ -1,7 +1,7 @@
 #include "TesterInterface.h"
 TesterInterface::TesterInterface(int maxNumTests)
 {
-    if(maxNumTests > 0)
+    if(maxNumTests >= 1)
     {
         this->maxNumTesters = maxNumTests;
     }
@@ -31,7 +31,7 @@ TesterInterface::TesterInterface(TesterInterface* other)
     testers = new NumberTester*[maxNumTesters];
     for (int i = 0; i < maxNumTesters; i++)
     {
-        if (testers[i] != NULL)
+        if (other->testers[i] != NULL)
         {
             this->testers[i] = other->testers[i]->clone();
         }
@@ -41,12 +41,20 @@ TesterInterface::TesterInterface(TesterInterface* other)
 }
 TesterInterface::TesterInterface(TesterInterface& other)
 {
-    this->maxNumTesters = other.maxNumTesters;
-    this->currNumTesters = other.currNumTesters;
+    if (&other != NULL)
+    {
+        this->maxNumTesters = other.maxNumTesters;
+        this->currNumTesters = other.currNumTesters;
+    }
+    else
+    {
+        this->maxNumTesters = 0;
+        this->currNumTesters = 0;
+    }
     testers = new NumberTester*[maxNumTesters];
     for (int i = 0; i < maxNumTesters; i++)
     {
-        if (testers[i] != NULL)
+        if (other.testers[i] != NULL)
         {
             this->testers[i] = other.testers[i]->clone();
         }
@@ -58,15 +66,21 @@ TesterInterface::~TesterInterface()
 {
     for (int i = 0; i < maxNumTesters; i++)
     {
-        delete testers[i];
+        if (testers[i] != NULL)
+        {
+            delete testers[i];
+        }
     }
     delete[] testers;
 }
 int TesterInterface::addTester(NumberTester* tester)
 {
-    if (tester != NULL)
+    if (tester == NULL || currNumTesters >= maxNumTesters)
     {
-        bool isFound = false;
+        return -1;
+    }
+    else
+    {
         for (int i = 0; i < maxNumTesters; i++)
         {
             if (testers[i] == NULL)
@@ -114,8 +128,19 @@ bool TesterInterface::evaluate(int value)
 }
 int* TesterInterface::failedTests(int value)
 {
-    int* failedTests = new int[currNumTesters];
     int count = 0;
+    for (int i = 0; i < maxNumTesters; i++)
+    {
+        if (testers[i] != NULL)
+        {
+            if (testers[i]->evaluate(value) == false)
+            {
+                count++;
+            }
+        }
+    }
+    int* failedTests = new int[count];
+    count = 0;
     for (int i = 0; i < maxNumTesters; i++)
     {
         if (testers[i] != NULL)
@@ -155,11 +180,11 @@ NumberTester* TesterInterface::operator[](int index)
     }
     return NULL;
 }
-const int TesterInterface::getCurrNumTesters()
+int TesterInterface::getCurrNumTesters()const
 {
     return currNumTesters;
 }
-const int TesterInterface::getMaxNumTesters()
+int TesterInterface::getMaxNumTesters()const 
 {
     return maxNumTesters;
 }

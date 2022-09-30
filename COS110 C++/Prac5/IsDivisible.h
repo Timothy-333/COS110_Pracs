@@ -4,6 +4,8 @@
 // static int numAliveObjects = 0;
 class IsDivisible: public ValueDependantTester
 {
+private:
+    static int numAliveObjects;
 public:
     IsDivisible(int);
     virtual ~IsDivisible();

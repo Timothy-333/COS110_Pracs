@@ -1,5 +1,5 @@
 #include "IsDivisible.h"
-
+int IsDivisible::numAliveObjects = 0;
 IsDivisible::IsDivisible(int val): ValueDependantTester(val)
 {
     numAliveObjects++;
@@ -25,6 +25,6 @@ NumberTester* IsDivisible::clone()
 }
 int IsDivisible::getNumAliveObjects()
 {
-    return getNumAliveObjects();
+    return numAliveObjects;
 }
 

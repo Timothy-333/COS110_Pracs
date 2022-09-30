@@ -1,5 +1,5 @@
 #include "IsSmaller.h"
-
+int IsSmaller::numAliveObjects = 0;
 IsSmaller::IsSmaller(int val): ValueDependantTester(val)
 {
     numAliveObjects++;
@@ -18,5 +18,5 @@ NumberTester* IsSmaller::clone()
 }
 int IsSmaller::getNumAliveObjects()
 {
-    return getNumAliveObjects();
+    return numAliveObjects;
 }
