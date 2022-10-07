@@ -31,6 +31,9 @@
         "type_traits": "cpp",
         "typeinfo": "cpp",
         "utility": "cpp",
-        "cstddef": "cpp"
+        "cstddef": "cpp",
+        "unordered_map": "cpp",
+        "vector": "cpp",
+        "optional": "cpp"
     }
 }

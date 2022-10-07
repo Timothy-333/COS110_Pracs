@@ -2,8 +2,11 @@
 //This main as-is does not test for everything
 
 #include <iostream>
+#include "Passenger.h"
+#include "Cargo.h"
+#include "Exceptions.h"
+#include "Plane.h"
 #include "Controller.h"
-
 using namespace std;
 
 int main()
@@ -11,14 +14,17 @@ int main()
 
 	cout<<"-----Testing Cargo-----"<<endl<<endl;
 
-	Plane<Cargo>* plane = new Plane<Cargo>(200);
+	Plane<Cargo>* plane = new Plane<Cargo>(400);
+	// Cargo* c1 = new Cargo(100, 100);
+	// plane->add(c1);
+	// plane->remove(c1);
 	Controller<Cargo> cc(plane);
 	cout<<cc.loadOnPlane(new Cargo(50, 5))<<endl;
 	cout<<cc.loadOnPlane(new Cargo(0.2, 500))<<endl;
 	cout<<cc.loadOnPlane(new Cargo(30, 5))<<endl;
 	cout<<cc.loadOnPlane(new Cargo(80.4, 1))<<endl;
-	cout<<cc.loadOnPlane(new Cargo(50, 5))<<endl;
-
+	// cout<<cc.loadOnPlane(new Cargo(50, 5))<<endl;
+	
 	cout<<"Total value: "<<cc.getTotalValue()<<endl;
 	cout<<"Contents:\n"<<cc.getPlaneContents()<<endl<<endl;
 
