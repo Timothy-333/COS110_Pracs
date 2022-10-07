@@ -1,15 +1,22 @@
 //The Cargo implementation file
 #include "Cargo.h"
+using namespace std;
 Cargo::Cargo(double w, double ppw)
 {
     this->weight = w;
     value = w * ppw;
 }
-std::string Cargo::describe()
+string Cargo::describe()
 {
-    std::stringstream ss;
-    ss << "Generic Cargo <" << value << "> (" << weight << ")";
-    return ss.str();
+    string a, b;
+    string output;
+    stringstream ss1,ss2;
+    ss1 << value;
+    ss2 << weight;
+    ss1 >> a;
+    ss2 >> b;
+    output = "Generic cargo <" + a + "> (" + b + ")";
+    return output;
 }
 double Cargo::getWeight() const
 {

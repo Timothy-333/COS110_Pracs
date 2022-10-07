@@ -2,24 +2,29 @@
 #ifndef PLANE_H
 #define PLANE_H
 #include <vector>
-#include <string>
 #include "Exceptions.h"
 #include "SecretCargo.h"
 
+using namespace std;
+
 //See spec on inclusion strategy for templates
-template <class T>
-class  Plane
+
+template <typename T>
+class Plane 
 {
-private:
-    std::vector<T*> cargo;
+    private:
+    vector<T*> cargo;
     double maxWeight;
-public:
-    Plane(double);
+
+    public:
+    Plane(double max);
     ~Plane();
-    void add(T*);
-    void remove(T*);
-    std::string getDescription();
+    void add(T* item);
+    void remove(T* item);
+    string getDescription();
     double calculateValue();
+
 };
+
 #include "Plane.cpp"
 #endif

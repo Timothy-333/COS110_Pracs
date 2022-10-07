@@ -2,6 +2,8 @@
 #ifndef PLANE_CPP
 #define PLANE_CPP
 #include <string>
+#include <iostream>
+using namespace std;
 template <class T>
 Plane<T>::Plane(double max)
 {
@@ -37,6 +39,7 @@ template <class T>
 void Plane<T>::remove(T* item)
 {
     bool found = false;
+    int pos = 0;
     if(cargo.size() == 0)
     {
         throw EmptyEx();
@@ -47,7 +50,7 @@ void Plane<T>::remove(T* item)
         {
             if (cargo[i] == item)
             {
-                cargo.erase(cargo.begin() + i);
+                pos = i;
                 found = true;
                 break;
             }
@@ -57,9 +60,13 @@ void Plane<T>::remove(T* item)
     {
         throw NotFoundEx<T>(item);
     }
+    else
+    {
+        cargo.erase(cargo.begin() + pos);
+    }
 }
 template <class T>
-std::string Plane<T>::getDescription()
+string Plane<T>::getDescription()
 {
     if (cargo.size() == 0)
     {
@@ -67,17 +74,20 @@ std::string Plane<T>::getDescription()
     }
     else
     {
-        std::stringstream ss;
-        for (int i = 0; i < cargo.size()-1; i++)
+        string output;
+        for (int i = 0; i < cargo.size(); i++)
         {
-            ss << cargo[i]->describe() << std::endl;
+            output += cargo[i]->describe();
+            if (i+1 != cargo.size())
+            {
+                output += "\n";
+            }
         }
-        ss << cargo[cargo.size()-1]->describe();
-        return ss.str();
+    return output;
     }
 }
 template <>
-std::string Plane<SecretCargo>::getDescription()
+string Plane<SecretCargo>::getDescription()
 {
     if (cargo.size() == 0)
     {
@@ -96,29 +106,64 @@ double Plane<T>::calculateValue()
     {
         throw EmptyEx();
     }
+    // else
+    // {
+    //     double leastValuable = 99999;
+    //     int leastindex = 0;
+    //     double secondLeastValuable = 9999999;
+    //     double totalValue = 0;
+    //     for (int i = 0; i < cargo.size(); i++)
+    //     {
+    //         if (cargo[i]->getValue() < leastValuable)
+    //         {
+    //             leastValuable = cargo[i]->getValue();
+    //             leastindex = i;
+    //         }
+    //         if (cargo[i]->getValue() < secondLeastValuable && cargo[i]->getValue() > leastValuable)
+    //         {
+    //             secondLeastValuable = cargo[i]->getValue();
+    //         }
+    //         totalValue += cargo[i]->getValue();
+    //     }
+    //     if (leastValuable < secondLeastValuable/2.0)
+    //         throw UndervaluedEx<T>(cargo[leastindex], (totalValue-leastValuable));
+        
+    //     return totalValue;
+    // }
+    double totalVal = 0;
+    vector<double> temp;
+    for(int i = 0; i < cargo.size(); i++)
+    {
+        temp.push_back(cargo[i]->getValue());
+        totalVal += cargo[i]->getValue();
+    }  
+    int index;
+    for (int i = 0; i < cargo.size()-1; i++)
+    {
+        for (int j = 0; j < cargo.size() - i - 1; j++)
+        {   
+            if (temp[j] > temp[j + 1])
+            {
+                double smallest = temp[j+1];
+                temp[j+1] = temp[j];
+                temp[j] = smallest;
+            }
+        }
+    }
+    for (int i = 0; i < cargo.size(); i++)
+    {
+        if (temp[0] == cargo[i]->getValue())
+        {
+            index = i;
+        }
+    }
+    if (temp[0] < temp[1]/2)
+    {
+        throw UndervaluedEx<T>(cargo[index], totalVal - cargo[index]->getValue());
+    }
     else
     {
-        double leastValuable = 9999999;
-        int leastindex = 0;
-        double secondLeastValuable = 9999999;
-        double totalValue = 0;
-        for (int i = 0; i < cargo.size(); i++)
-        {
-            if (cargo[i]->getValue() < leastValuable)
-            {
-                leastValuable = cargo[i]->getValue();
-                leastindex = i;
-            }
-            if (cargo[i]->getValue() < secondLeastValuable && cargo[i]->getValue() > leastValuable)
-            {
-                secondLeastValuable = cargo[i]->getValue();
-            }
-            totalValue += cargo[i]->getValue();
-        }
-        if (leastValuable < secondLeastValuable/2.0)
-            throw UndervaluedEx<T>(cargo[leastindex], (totalValue-leastValuable));
-        
-        return totalValue;
+        return totalVal;
     }
 }
 template <>

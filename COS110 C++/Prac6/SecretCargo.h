@@ -1,12 +1,18 @@
 //The SecretCargo class
-#ifndef SECRET_CARGO_H
-#define SECRET_CARGO_H
+#ifndef SECRETCARGO_H
+#define SECRETCARGO_H
+#include <string>
+#include <sstream>
+
 class SecretCargo
 {
-private:
+    private:
     double weight;
-public:
-    SecretCargo(double);
+    
+    public:
+    SecretCargo(double w);
     double getWeight() const;
+    
 };
+
 #endif

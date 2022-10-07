@@ -4,19 +4,25 @@
 #include "Plane.h"
 #include "Passenger.h"
 #include "Cargo.h"
-#include "Exceptions.h"
 #include <string>
+
+using namespace std;
+
 //See spec for inclusion strategy for templates
-template <class T>
+
+template <typename T>
 class Controller
 {
-private:
+    private:
     Plane<T>* plane;
-public:
-    Controller(Plane<T>*);
-    std::string loadOnPlane(T*);
+
+    public:
+    Controller(Plane<T>* p);
+    string loadOnPlane(T* t);
     double getTotalValue();
-    std::string getPlaneContents();
+    string getPlaneContents();
+
 };
+
 #include "Controller.cpp"
 #endif

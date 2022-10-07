@@ -1,6 +1,7 @@
 //Exception implementations
 #ifndef EXCEPTIONS_CPP
 #define EXCEPTIONS_CPP
+using namespace std;
 AboveWeightEx::AboveWeightEx(double wd)
 {
     weightDiff = wd;
@@ -12,13 +13,13 @@ double AboveWeightEx::getDifference() const
 template <class E>
 UndervaluedEx<E>::UndervaluedEx(E* uv, double s)
 {
-    UnderVal = uv;
+    underVal = uv;
     sum = s;
 }
 template <class E>
 E* UndervaluedEx<E>::getUndervalued() const
 {
-    return UnderVal;
+    return underVal;
 }
 template <class E>
 double UndervaluedEx<E>::getSum() const

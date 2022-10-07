@@ -1,16 +1,24 @@
 //The Passenger implementation file
 #include "Passenger.h"
-Passenger::Passenger(std::string id, double weight, double ticketPrice)
+using namespace std;
+Passenger::Passenger(string id, double weight, double ticketPrice)
 {
     this->ID = id;
     this->weight = weight;
     this->ticketPrice = ticketPrice;
 }
-std::string Passenger::describe()
+string Passenger::describe()
 {
-    std::stringstream ss;
-    ss << ID << " <" << ticketPrice << "> (" << weight << ")";
-    return ss.str();
+    stringstream ss1,ss2,ss3;
+    string id, ticket, w, output;
+    ss1 << ID;
+    ss2 << ticketPrice;
+    ss3 << weight;
+    ss1 >> id;
+    ss2 >> ticket;
+    ss3 >> w;
+    output = id + " <" + ticket + "> " + "(" + w + ")";
+    return output;
 }
 double Passenger::getWeight() const
 {

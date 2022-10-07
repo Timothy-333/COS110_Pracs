@@ -2,13 +2,14 @@
 #ifndef CONTROLLER_CPP
 #define CONTROLLER_CPP
 #include <string>
+using namespace std;
 template <class T>
 Controller<T>::Controller(Plane<T>* p)
 {
     this->plane = p;
 }
 template <class T>
-std::string Controller<T>::loadOnPlane(T* item)
+string Controller<T>::loadOnPlane(T* item)
 {
     try
     {
@@ -17,9 +18,12 @@ std::string Controller<T>::loadOnPlane(T* item)
     }
     catch (const AboveWeightEx e)
     {
-        std::stringstream ss;
-        ss << "Could not load item, above max weight by " << e.getDifference();
-        return ss.str();
+        string a, b;
+        stringstream ss;
+        ss << e.getDifference();
+        ss >> a;
+        b = "Could not load item, above max weight by " + a;
+        return b;
     }
 }
 template <class T>
@@ -29,6 +33,11 @@ double Controller<T>::getTotalValue()
     {
         return plane->calculateValue();
     }
+    catch (const UndervaluedEx<T> ua)
+    {
+        plane->remove(ua.getUndervalued());
+        return ua.getSum();
+    }
     catch (const UnauthorisedEx e)
     {
         return 0;
@@ -37,15 +46,9 @@ double Controller<T>::getTotalValue()
     {
         return 0;
     } 
-    catch (const UndervaluedEx<T> ua)
-    {
-
-        plane->remove(ua.getUndervalued());
-        return ua.getSum();
-    }
 }
 template <class T>
-std::string Controller<T>::getPlaneContents()
+string Controller<T>::getPlaneContents()
 {
     try
     {

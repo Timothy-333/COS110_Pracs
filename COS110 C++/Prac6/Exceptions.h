@@ -3,43 +3,52 @@
 #ifndef EXCEPTIONS_H
 #define EXCEPTIONS_H
 #include <sstream>
+
 class AboveWeightEx
 {
-private:
+    private:
     double weightDiff;
-public:
-    AboveWeightEx(double);
+
+    public:
+    AboveWeightEx(double wd);
     double getDifference() const;
+
 };
 
 class EmptyEx
 {
+
 };
 
 class UnauthorisedEx
 {
+
 };
 
-template <class E>
+template <typename E>
 class UndervaluedEx
 {
-private:
-    E* UnderVal;
+    private:
+    E* underVal;
     double sum;
-public:
-    UndervaluedEx(E*, double);
+
+    public:
+    UndervaluedEx(E* uv, double s);
     E* getUndervalued() const;
     double getSum() const;
+
 };
 
-template <class E>
+template <typename E>
 class NotFoundEx
 {
-private:
+    private:
     E* missing;
-public:
-    NotFoundEx(E*);
+
+    public:
+    NotFoundEx(E* nf);
     E* getNotFound() const;
+
 };
 #include "Exceptions.cpp"
 #endif
