@@ -28,8 +28,31 @@ struct event_data
 
 
 /////////////////////////////YOUR CODE HERE//////////////////////////////
-
-
+template <typename T>
+static string to_string(T input)
+{
+    stringstream ss;
+    ss << input;
+    return ss.str();
+}
+template <typename T>
+static int to_int(T input)
+{
+    stringstream ss;
+    ss << input;
+    int i;
+    ss >> i;
+    return i;
+}
+template <typename T>
+static long int to_long(T input)
+{
+    stringstream ss;
+    ss << input;
+    long int i;
+    ss >> i;
+    return i;
+}
 //////////////////////////////////////////////////////////////////////////
 ////////////////////DO NOT CHANGE ANY CODE BELOW//////////////////////////
 //////////////////////////////////////////////////////////////////////////
