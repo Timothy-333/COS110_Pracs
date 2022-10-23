@@ -1,6 +1,8 @@
 #include "matrix.h"
+#include "arithmetic.h"
 #include <iomanip>
-Matrix::Matrix(unsigned r, unsigned c) : Arithmetic::Arithmetic()
+using namespace std;
+Matrix::Matrix(unsigned r, unsigned c)
 {
     rows = r;
     cols = c;
@@ -357,49 +359,6 @@ unsigned Matrix::getCols() const
 {
     return cols;
 }
-Matrix Matrix::operator|(const Matrix& rhs) 
-{
-    if (cols != rows)
-        throw "Error: non-square matrix provided";
-    else if(rhs.getRows() != rows || rhs.getCols() != 1)
-        throw "Error: incorrect augmentation";
-    else
-    {
-        bool flag = true;
-        Matrix temp1(*this);
-        Matrix temp2(rhs);
-        for (unsigned i = 1; i < rows; i++)
-        {
-            for (unsigned j = 0; j <= i; j++)
-            {
-                if (this->matrix[i][j] != 0)
-                {
-                    flag = false;
-                }
-            }
-        }
-        if(!flag)
-            temp1|=temp2;
-
-        Matrix result(temp2);
-        for (unsigned i = temp1.getRows()-1; i >= 0; i--)
-        {
-            for (unsigned j = i+1; j < temp1.getCols(); j++)
-            {
-                result.matrix[i][0] -= temp1.matrix[i][j] * result.matrix[j][0];
-            }
-            if(temp1.matrix[i][i] == 0)
-            {
-                throw "Error: division by zero";
-            }
-            else
-            {
-                result.matrix[i][0] /= temp1.matrix[i][i];
-            }
-        }
-        return result;
-    }
-}
 Matrix& Matrix::operator|=(Matrix& rhs) 
 {
     if (cols != rows)
@@ -409,21 +368,73 @@ Matrix& Matrix::operator|=(Matrix& rhs)
     else
     {
         double factor = 0;
-        for (unsigned i = 0; i < rows; i++)
+        for (int i = 0; i < rows; i++)
         {
-            for (unsigned j = i+1; j < rows; j++)
+            for (int j = i+1; j < rows; j++)
             {
                 if(matrix[i][i] == 0)
                     throw "Error: division by zero";
-
-                factor = matrix[j][i] / matrix[i][i];
-                for (unsigned k = 0; k < cols; k++)
+                else
+                {
+                    factor = matrix[j][i] / matrix[i][i];
+                }
+                for (int k = 0; k < cols; k++)
                 {
                     matrix[j][k] -= factor * matrix[i][k];
                 }
-                rhs.matrix[j][0] -= factor * rhs.matrix[i][0];
+                (*rhs.matrix[j]) -= factor * (*rhs.matrix[i]);
             }
         }
         return *this;
+    }
+}
+Matrix Matrix::operator|(const Matrix& rhs) 
+{
+    if (cols != rows)
+        throw "Error: non-square matrix provided";
+    else if(rhs.getRows() != rows || rhs.getCols() != 1)
+        throw "Error: incorrect augmentation";
+    else
+    { 
+        bool flag = true;
+        Matrix temp1(*this);
+        Matrix temp2(rhs);
+        for (int i = 0; i < rows; i++)
+        {
+            for (int j = 0; j <= i; j++)
+            {
+                if (this->matrix[i][j] != 0)
+                {
+                    flag = false;
+                    break;
+                }
+            }
+        }
+                
+        if(!flag)
+        {
+            try
+            {
+                temp1|=temp2;
+            }
+            catch(const char * err) { throw err; }
+        }
+
+        for (int i = temp1.getRows()-1; i >= 0; i--)
+        {
+            for (int j = i+1; j < temp1.getRows(); j++)
+            {
+                temp2.matrix[i][0] -= temp1.matrix[i][j] * temp2.matrix[j][0];
+            }
+            if(temp1.matrix[i][i] == 0)
+            {
+                throw "Error: division by zero";
+            }
+            else
+            {
+                temp2.matrix[i][0] /= temp1.matrix[i][i];
+            }
+        }
+        return temp2;
     }
 }

@@ -1,6 +1,8 @@
 #include "vector.h"
+#include "arithmetic.h"
 #include <iomanip>
-Vector::Vector(unsigned s) : Arithmetic::Arithmetic()
+using namespace std;
+Vector::Vector(unsigned s)
 {
     size = s;
     vector = new double[size];

@@ -138,8 +138,11 @@ static void task3() {
     b.print();
 
     cout << "Reducing to upper-triangular form:" << endl;
-
-    A |= b;
+    try
+    {
+        A |= b;
+    }
+    catch(const char * err) { cout << err << endl; }
 
     A.print();
     b.print();
