@@ -1,8 +1,9 @@
 #include "vector.h"
 #include "arithmetic.h"
 #include <iomanip>
+#include <sstream>
 using namespace std;
-Vector::Vector(unsigned s)
+Vector::Vector(unsigned s): Arithmetic::Arithmetic()
 {
     size = s;
     vector = new double[size];
@@ -20,9 +21,22 @@ Vector::Vector(const Vector& rhs)
         vector[i] = rhs.vector[i];
     }
 }
+Vector::Vector(const double *temp, unsigned s)
+{
+    size = s;
+    vector = new double[size];
+    for(unsigned i = 0; i < size; i++)
+    {
+        vector[i] = temp[i];
+    }
+}
 Vector::~Vector() 
 {
     delete[] vector;
+}
+unsigned Vector::getSize() const
+{
+    return size;
 }
 void Vector::print() 
 {
@@ -30,7 +44,7 @@ void Vector::print()
     {
         cout << setprecision(3) << setw(10) << vector[i];
     }
-    cout << endl << setw(0);
+    cout << endl;
 }
 void Vector::readFile(istream &infile) 
 {
@@ -44,7 +58,7 @@ const Vector& Vector::operator=(const Vector& rhs)
     if (this != &rhs) 
     {
         delete[] vector;
-        size = rhs.getSize();
+        size = rhs.size;
         vector = new double[size];
         for (unsigned i = 0; i < size; i++) 
         {
@@ -53,9 +67,23 @@ const Vector& Vector::operator=(const Vector& rhs)
     }
     return *this;
 }
+double& Vector::operator[](const unsigned r)
+{
+    if(r < size)
+        {return vector[r];}
+    else
+        {throw "Error: index out of range";}
+}
+const double& Vector::operator[](const unsigned r) const
+{
+    if(r < size)
+        {return vector[r];}
+    else
+        {throw "Error: index out of range";}
+}
 Vector Vector::operator+(const Vector& rhs)
 {
-    if (size != rhs.getSize()) 
+    if (size != rhs.size) 
     {
         throw "Error: adding vectors of different dimensionality";
     }
@@ -64,14 +92,14 @@ Vector Vector::operator+(const Vector& rhs)
         Vector result(size);
         for (unsigned i = 0; i < size; i++) 
         {
-            result.vector[i] += rhs[i];
+            result.vector[i] = vector[i] + rhs.vector[i];
         }
         return result;
     }
 }
 Vector& Vector::operator+=(const Vector& rhs) 
 {
-    if (size != rhs.getSize()) 
+    if (size != rhs.size) 
     {
         throw "Error: adding vectors of different dimensionality";
     }
@@ -79,14 +107,14 @@ Vector& Vector::operator+=(const Vector& rhs)
     {
         for (unsigned i = 0; i < size; i++) 
         {
-            vector[i] += rhs[i];
+            vector[i] += rhs.vector[i];
         }
         return *this;
     }
 }
 Vector Vector::operator-(const Vector& rhs) 
 {
-    if (size != rhs.getSize()) 
+    if (size != rhs.size) 
     {
         throw "Error: subtracting vectors of different dimensionality";
     }
@@ -95,14 +123,14 @@ Vector Vector::operator-(const Vector& rhs)
         Vector result(size);
         for (unsigned i = 0; i < size; i++) 
         {
-            result.vector[i] -= rhs[i];
+            result.vector[i] = vector[i] - rhs.vector[i];
         }
         return result;
     }
 }
 Vector& Vector::operator-=(const Vector& rhs) 
 {
-    if (size != rhs.getSize()) 
+    if (size != rhs.size) 
     {
         throw "Error: subtracting vectors of different dimensionality";
     }
@@ -110,7 +138,7 @@ Vector& Vector::operator-=(const Vector& rhs)
     {
         for (unsigned i = 0; i < size; i++) 
         {
-            vector[i] -= rhs[i];
+            vector[i] -= rhs.vector[i];
         }
         return *this;
     }
@@ -179,7 +207,7 @@ Vector& Vector::operator*=(const double& rhs)
 Vector Vector::operator/(const double& rhs)
 {
     if (rhs == 0) 
-        throw "Error: division by zero";
+        {throw "Error: division by zero";}
     else
     {
         Vector result(size);
@@ -190,21 +218,14 @@ Vector Vector::operator/(const double& rhs)
         return result;
     }
 }
-double& Vector::operator[](const unsigned r)
+Vector operator* (const double& input, const Vector& v)
 {
-    if(r < size && r >= 0)
-        return vector[r];
-    else
-        throw "Error: index out of range";
+    Vector *temp = new Vector(v.size);
+    for(unsigned x = 0; x < v.size; x++)
+    {
+        temp->vector[x] = v[x] * input;
+    }
+
+    return *temp;
 }
-const double& Vector::operator[](const unsigned r) const
-{
-    if(r < size && r >= 0)
-        return vector[r];
-    else
-        throw "Error: index out of range";
-}
-unsigned Vector::getSize() const
-{
-    return size;
-}
+

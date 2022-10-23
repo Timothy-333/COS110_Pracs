@@ -91,14 +91,7 @@ static void task2() {
     m1->operator*(3.5).print();
     m1->operator*=(2);
     m1->print();
-    Matrix *m2 = new Matrix(6,2);
-    m2->readFile(infile);
-    m2->print();
-    cout << "Matrix Multiplication:" << endl;
-    (m1->operator*(*m2)).print();
-    m1->operator*=(*m2);
-    m1->print();
-    (*m1^0).print();
+
     cout << "Vector Multiplication by scalar:" << endl;
     Vector *vec1 = new Vector(5);
     vec1->readFile(infile);
@@ -138,11 +131,8 @@ static void task3() {
     b.print();
 
     cout << "Reducing to upper-triangular form:" << endl;
-    try
-    {
-        A |= b;
-    }
-    catch(const char * err) { cout << err << endl; }
+
+    A |= b;
 
     A.print();
     b.print();
@@ -159,8 +149,8 @@ static void task3() {
 }
 
 int main() {
-   task1();
-   task2();
-   task3();
+    task1();
+    task2();
+    task3();
     return 0;
 }

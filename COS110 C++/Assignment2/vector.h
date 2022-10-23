@@ -13,6 +13,7 @@ class Vector : public Arithmetic
  public:
   Vector(unsigned s);
   Vector(const Vector& rhs);
+  Vector(const double *temp, unsigned s);
   ~Vector();
 
   void print();
