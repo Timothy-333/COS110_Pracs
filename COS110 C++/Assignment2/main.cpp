@@ -91,7 +91,14 @@ static void task2() {
     m1->operator*(3.5).print();
     m1->operator*=(2);
     m1->print();
-
+    Matrix *m2 = new Matrix(6,2);
+    m2->readFile(infile);
+    m2->print();
+    cout << "Matrix Multiplication:" << endl;
+    (m1->operator*(*m2)).print();
+    m1->operator*=(*m2);
+    m1->print();
+    (*m1^0).print();
     cout << "Vector Multiplication by scalar:" << endl;
     Vector *vec1 = new Vector(5);
     vec1->readFile(infile);
@@ -113,44 +120,44 @@ static void task2() {
     infile.close();
 }
 
-// static void task3() {
-//     //////////////////////////////////
-//     // The rest is linear equations //
-//     //////////////////////////////////
-//     ifstream infile("task3Input.txt");
+static void task3() {
+    //////////////////////////////////
+    // The rest is linear equations //
+    //////////////////////////////////
+    ifstream infile("task3Input.txt");
 
-//     cout << "Reading matrices..." << endl;
-//     Matrix system(3,3), augmented(3,1);
-//     system.readFile(infile);
-//     augmented.readFile(infile);
+    cout << "Reading matrices..." << endl;
+    Matrix system(3,3), augmented(3,1);
+    system.readFile(infile);
+    augmented.readFile(infile);
 
-//     Matrix A = system;
-//     Matrix b = augmented;
+    Matrix A = system;
+    Matrix b = augmented;
 
-//     A.print();
-//     b.print();
+    A.print();
+    b.print();
 
-//     cout << "Reducing to upper-triangular form:" << endl;
+    cout << "Reducing to upper-triangular form:" << endl;
 
-//     A |= b;
+    A |= b;
 
-//     A.print();
-//     b.print();
+    A.print();
+    b.print();
 
-//     cout << "Solving the system:" << endl;
-//     Matrix c = A|b;
-//     c.print();
+    cout << "Solving the system:" << endl;
+    Matrix c = A|b;
+    c.print();
 
-//     cout << "Reducing to upper-triangular form AND solving the system:" << endl;
-//     c = system|augmented;
-//     c.print();
+    cout << "Reducing to upper-triangular form AND solving the system:" << endl;
+    c = system|augmented;
+    c.print();
 
-//     infile.close();
-// }
+    infile.close();
+}
 
 int main() {
    task1();
    task2();
-//    task3();
+   task3();
     return 0;
 }

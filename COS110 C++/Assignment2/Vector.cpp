@@ -1,5 +1,6 @@
-#include "Vector.h"
-Vector::Vector(unsigned s) 
+#include "vector.h"
+#include <iomanip>
+Vector::Vector(unsigned s) : Arithmetic::Arithmetic()
 {
     size = s;
     vector = new double[size];
@@ -25,7 +26,7 @@ void Vector::print()
 {
     for (unsigned i = 0; i < size; i++) 
     {
-        cout << vector[i] << setw(10) << setprecision(3);
+        cout << setprecision(3) << setw(10) << vector[i];
     }
     cout << endl << setw(0);
 }
@@ -50,82 +51,120 @@ const Vector& Vector::operator=(const Vector& rhs)
     }
     return *this;
 }
-Vector Vector::operator+(const Vector& rhs) 
+Vector Vector::operator+(const Vector& rhs)
 {
-    Vector* result = new Vector(size);
-    for (unsigned i = 0; i < size; i++) 
+    if (size != rhs.getSize()) 
     {
-        vector[i] = vector[i] + rhs[i];
+        throw "Error: adding vectors of different dimensionality";
     }
-    return *result;
+    else
+    {
+        Vector result(size);
+        for (unsigned i = 0; i < size; i++) 
+        {
+            result.vector[i] += rhs[i];
+        }
+        return result;
+    }
 }
 Vector& Vector::operator+=(const Vector& rhs) 
 {
-    for (unsigned i = 0; i < size; i++) 
+    if (size != rhs.getSize()) 
     {
-        vector[i] += rhs[i];
+        throw "Error: adding vectors of different dimensionality";
     }
-    return *this;
+    else
+    {
+        for (unsigned i = 0; i < size; i++) 
+        {
+            vector[i] += rhs[i];
+        }
+        return *this;
+    }
 }
 Vector Vector::operator-(const Vector& rhs) 
 {
-    Vector* result = new Vector(size);
-    for (unsigned i = 0; i < size; i++) 
+    if (size != rhs.getSize()) 
     {
-        result[i] = vector[i] - rhs[i];
+        throw "Error: subtracting vectors of different dimensionality";
     }
-    return *result;
+    else
+    {
+        Vector result(size);
+        for (unsigned i = 0; i < size; i++) 
+        {
+            result.vector[i] -= rhs[i];
+        }
+        return result;
+    }
 }
 Vector& Vector::operator-=(const Vector& rhs) 
 {
-    for (unsigned i = 0; i < size; i++) 
+    if (size != rhs.getSize()) 
     {
-        vector[i] -= rhs[i];
+        throw "Error: subtracting vectors of different dimensionality";
     }
-    return *this;
+    else
+    {
+        for (unsigned i = 0; i < size; i++) 
+        {
+            vector[i] -= rhs[i];
+        }
+        return *this;
+    }
 }
 Vector Vector::operator^(int pow)
 {
-    Vector* result = new Vector(size);
-    *result = *this;
-    for (unsigned i = 1; i < size; i++) 
+    if (pow < 0) 
     {
-        for (unsigned j = 0; j < size; j++)
-        {
-            (*result)[j] *= (*result)[j];
-        }
+        throw "Error: negative power is not supported";
     }
-    return *result;
+    else
+    {
+        Vector result(size);
+        for (unsigned i = 0; i < size; i++) {
+            for (int j = 0; j < pow; j++) {
+                result.vector[i] *= vector[i];
+            }
+        }
+        return result;
+    }
 }
 Vector& Vector::operator^=(int pow)
 {
-    for (unsigned i = 1; i < size; i++) 
+    if (pow < 0) 
     {
-        for (unsigned j = 0; j < size; j++)
-        {
-            vector[j] *= vector[j];
-        }
+        throw "Error: negative power is not supported";
     }
-    return *this;
+    else
+    {
+
+        for (unsigned i = 0; i < size; i++) {
+            for (int j = 0; j < pow; j++) {
+                vector[i] *= vector[i];
+            }
+        }
+        return *this;
+    }
+    
 }
 Vector Vector::operator~()
 {
-    Vector* result = new Vector(size);
-    *result = *this;
+    Vector result(size);
     for (unsigned i = 0; i < size; i++) 
     {
-        (*result)[i] = vector[size - i - 1];
+        result.vector[i] = vector[size - i - 1];
     }
-    return *result;
+    return result;
 }
 Vector Vector::operator*(const double& rhs)
 {
-    Vector* result = new Vector(size);
+    Vector result(size);
     for (unsigned i = 0; i < size; i++) 
     {
-        (*result)[i] = vector[i] * rhs;
+        result.vector[i] = vector[i] * rhs;
     }
-    return *result;
+    return result;
 }
 Vector& Vector::operator*=(const double& rhs)
 {
@@ -137,34 +176,31 @@ Vector& Vector::operator*=(const double& rhs)
 }
 Vector Vector::operator/(const double& rhs)
 {
-    Vector* result = new Vector(size);
-    for (unsigned i = 0; i < size; i++) 
+    if (rhs == 0) 
+        throw "Error: division by zero";
+    else
     {
-        (*result)[i] = vector[i] / rhs;
+        Vector result(size);
+        for (unsigned i = 0; i < size; i++) 
+        {
+            result.vector[i] = vector[i] / rhs;
+        }
+        return result;
     }
-    return *result;
 }
 double& Vector::operator[](const unsigned r)
 {
-    if(r < size)
-    {
+    if(r < size && r >= 0)
         return vector[r];
-    }
     else
-    {
-        throw "Error: invalid index";
-    }
+        throw "Error: index out of range";
 }
 const double& Vector::operator[](const unsigned r) const
 {
-    if(r < size)
-    {
+    if(r < size && r >= 0)
         return vector[r];
-    }
     else
-    {
-        throw "Error: invalid index";
-    }
+        throw "Error: index out of range";
 }
 unsigned Vector::getSize() const
 {

@@ -4,7 +4,7 @@
 #include "arithmetic.h"
 #include "vector.h"
 #include <fstream>
-#include <iomanip>
+
 using namespace std;
 
 class Matrix : public Arithmetic

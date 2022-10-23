@@ -4,7 +4,7 @@
 #include <iostream>
 #include "arithmetic.h"
 #include <fstream>
-#include <iomanip>
+
 using namespace std;
 
 class Vector : public Arithmetic
