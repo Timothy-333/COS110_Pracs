@@ -1,4 +1,5 @@
 #include <sstream>
+#include <iostream>
 using namespace std;
 template<class T>
 SortList<T>::SortList(bool asc)
@@ -30,7 +31,7 @@ SortNode<T>* SortList<T>::remove(T val)
     if(head != NULL)
     {
         SortNode<T>* nodePtr = head;
-        while (val != nodePtr->value && nodePtr->next != NULL)
+        while (val != nodePtr->getValue() && nodePtr->next != NULL)
         {   
             nodePtr->prev = nodePtr;
             nodePtr = nodePtr->next;
@@ -68,49 +69,49 @@ void SortList<T>::setAsc(bool a)
 template<class T>
 void SortList<T>::sort()
 {
-    if(head != NULL)
+    if(head != NULL && head->next !=NULL)
     {
         SortNode<T>* nodePtr = head;
-        int size = 0;
-        while (nodePtr->next != NULL)
-        {
-            nodePtr = nodePtr->next;
-            size++;
-        }
-        
+        SortNode<T>* prevNode = NULL;
         if(ascending)
         {
-            for (int i = 0; i < size; i++)
-            {
-                while (nodePtr->getValue() < nodePtr->next->getValue() && nodePtr->next != NULL)
-                {   
-                    SortNode<T>* temp1 = new SortNode<T>(nodePtr->next->getValue());
-                    SortNode<T>* temp2 = new SortNode<T>(nodePtr->getValue());
-                    temp1->next = temp2;
-                    temp1->prev = nodePtr->prev;
-                    nodePtr->prev->next = temp1;
-                    temp2->next = nodePtr->next->next;
-                    temp2->prev = temp1;
-                    nodePtr = temp2;
+            for (int i = 0; i < 5; i++)
+            {                
+                nodePtr = head->next;
+                prevNode = head;
+                for (int j = 0; j < 5-i-1; j++)
+                {           
+                    if(prevNode->getValue() > nodePtr->getValue())
+                    {
+                        nodePtr->next->prev = prevNode;
+                        prevNode->prev->next = nodePtr;
+                        prevNode->next = nodePtr->next;
+                        nodePtr->next = prevNode;
+                        nodePtr->prev = prevNode->prev;
+                        prevNode->prev = nodePtr;
+                        nodePtr = prevNode->next;
+                    }
+                    else
+                    {
+                        prevNode = nodePtr;
+                        nodePtr = nodePtr->next;
+                    }
+                    debug();
                 }
+                debug();
             }
         }
         else
         {
-            for (int i = 0; i < size; i++)
-                {
-                    while (nodePtr->getValue() > nodePtr->next->getValue() && nodePtr->next != NULL)
-                {   
-                    SortNode<T>* temp1 = new SortNode<T>(nodePtr->next->getValue());
-                    SortNode<T>* temp2 = new SortNode<T>(nodePtr->getValue());
-                    temp1->next = temp2;
-                    temp1->prev = nodePtr->prev;
-                    nodePtr->prev->next = temp1;
-                    temp2->next = nodePtr->next->next;
-                    temp2->prev = temp1;
-                    nodePtr = temp2;
-                }
-                }
+            // while (nodePtr->next != NULL && nodePtr->getValue() > nodePtr->next->getValue())
+            // {   
+            //     // nodePtr->prev->next = nodePtr->next;
+            //     // nodePtr->prev = nodePtr->next;
+            //     // nodePtr->next = nodePtr->next->next;
+            //     // nodePtr->next->prev = nodePtr->prev;
+            //     // nodePtr->next->next = nodePtr->next;
+            //     nodePtr = nodePtr->next;
+            // }
         }
     }
 }
@@ -126,7 +127,7 @@ string SortList<T>::print()
             result += nodePtr->print() + ",";
             nodePtr = nodePtr->next;
         }
-        result += nodePtr->print();
+        result += nodePtr->print() + "\n";
     }
     return result;
 }
@@ -138,6 +139,7 @@ SortNode<T>* SortList<T>::getHead()
 template <class T>
 string SortList<T>::debug()
 {
-    return "";
+    cout<<print()<<endl;
+    return "aaaaa";
 }
 
