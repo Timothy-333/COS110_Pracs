@@ -11,7 +11,7 @@ using namespace std;
 
 int main()
 {
-	SortList<int>* ll = new SortList<int>(1);
+	SortList<int>* ll = new SortList<int>(0);
 	ll->add(new SortNode<int>(5));
 	ll->add(new SortNode<int>(50));
 	ll->add(new SortNode<int>(0));
@@ -20,9 +20,15 @@ int main()
 	ll->add(new SortNode<int>(907));
 	ll->add(new SortNode<int>(1));
 
+	SortList<int>* l2 = new SortList<int>(0);
+	l2->add(new SortNode<int>(5));
+
+	ll->add(new SortNode<int>(28));
+	ll->add(new SortNode<int>(907));
+	ll->add(new SortNode<int>(1));
 
 	cout<<"Initial print"<<endl<<ll->print()<<endl;
-//	ll->remove(3);
+	ll->remove(3);
 	ll->sort();
 	cout<<"Sorted"<<endl<<ll->print()<<endl;
 	cout<<"Removed: "<<ll->remove(50)->print()<<endl<<endl;
@@ -32,7 +38,20 @@ int main()
 	ll->setAsc(0);
 
 	cout<<"Descending"<<endl<<ll->print()<<endl;
-
+	ll->remove(5);
+	ll->sort();
+	cout<<"Ascending"<<endl<<ll->print()<<endl;
+	cout<<"Removed: "<<ll->remove(0)->print()<<endl<<endl;
+	ll->setAsc(1);
+	cout<<"Descending"<<endl<<ll->print()<<endl;
+	ll->setAsc(0);
+	cout<<"Descending"<<endl<<ll->print()<<endl;
+	l2->sort();
+	cout<<"Sorted"<<endl<<l2->print()<<endl;
+	l2->setAsc(0);
+	cout<<"Descending"<<endl<<l2->print()<<endl;
+	cout<<"Removed: "<<l2->remove(5)->print()<<endl<<endl;
+	l2->sort();
 	delete ll;
 
 	return 0;

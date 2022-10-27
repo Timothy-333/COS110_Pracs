@@ -11,7 +11,9 @@ string SortNode<T>::print()
 {
     stringstream ss;
     ss<<value;
-    return ss.str();
+    string out;
+    ss >> out;
+    return out;
 }
 template<class T>
 T SortNode<T>::getValue()

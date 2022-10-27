@@ -26,23 +26,36 @@ void SortList<T>::add(SortNode<T>* a)
 template<class T>
 SortNode<T>* SortList<T>::remove(T val)
 {
-    SortNode<T>* temp = NULL;
     SortNode<T>* nodePtr = NULL;
     if(head != NULL)
     {
-        SortNode<T>* nodePtr = head;
-        while (val != nodePtr->getValue() && nodePtr->next != NULL)
+        nodePtr = head;
+        while (nodePtr != NULL && val != nodePtr->getValue())
         {   
-            nodePtr->prev = nodePtr;
             nodePtr = nodePtr->next;
         }
-        temp = nodePtr;
-        nodePtr->prev->next = nodePtr->next;
-        nodePtr->next->prev = nodePtr->prev;
-        delete nodePtr;
+        if(nodePtr != NULL)
+        {
+            if(nodePtr->prev != NULL)
+            {
+                nodePtr->prev->next = nodePtr->next;
+            }
+            else
+            {
+                head = nodePtr->next;
+            }
+            if(nodePtr->next != NULL)
+            {
+                nodePtr->next->prev = nodePtr->prev;
+            }
+            else
+            {
+                tail = nodePtr->prev;
+            }
+        }
     }
 
-    return temp;
+    return nodePtr;
 }
 template<class T>
 void SortList<T>::setAsc(bool a)
@@ -53,7 +66,7 @@ void SortList<T>::setAsc(bool a)
         {   
             SortNode<T>* temp = NULL;
             SortNode<T>* nodePtr = head;
-            while (nodePtr->next != NULL)
+            while (nodePtr != NULL)
             {
                 temp = nodePtr->next;
                 nodePtr->next = nodePtr->prev;
@@ -65,6 +78,7 @@ void SortList<T>::setAsc(bool a)
             tail = temp;
         }
     }
+    ascending = a;
 }
 template<class T>
 void SortList<T>::sort()
@@ -73,21 +87,43 @@ void SortList<T>::sort()
     {
         SortNode<T>* nodePtr = head;
         SortNode<T>* prevNode = NULL;
+        int size = 0;
+        while (nodePtr != NULL)
+        {
+            size++;
+            nodePtr = nodePtr->next;
+        }
         if(ascending)
         {
-            for (int i = 0; i < 5; i++)
+            for (int i = 0; i < size; i++)
             {                
                 nodePtr = head->next;
                 prevNode = head;
-                for (int j = 0; j < 5-i-1; j++)
+                for(int j = 0; j < size-i-1;j++)
                 {           
                     if(prevNode->getValue() > nodePtr->getValue())
                     {
-                        nodePtr->next->prev = prevNode;
-                        prevNode->prev->next = nodePtr;
-                        prevNode->next = nodePtr->next;
+                        if(nodePtr->next != NULL)
+                        {
+                            nodePtr->next->prev = prevNode;
+                            prevNode->next = nodePtr->next;
+                        }
+                        else
+                        {
+                            tail = prevNode;
+                            prevNode->next = NULL;
+                        }
                         nodePtr->next = prevNode;
-                        nodePtr->prev = prevNode->prev;
+                        if(prevNode->prev == NULL)
+                        {
+                            head = nodePtr;
+                            nodePtr->prev = NULL;
+                        }
+                        else
+                        {
+                            prevNode->prev->next = nodePtr;
+                            nodePtr->prev = prevNode->prev;
+                        }
                         prevNode->prev = nodePtr;
                         nodePtr = prevNode->next;
                     }
@@ -96,22 +132,50 @@ void SortList<T>::sort()
                         prevNode = nodePtr;
                         nodePtr = nodePtr->next;
                     }
-                    debug();
                 }
-                debug();
             }
         }
         else
         {
-            // while (nodePtr->next != NULL && nodePtr->getValue() > nodePtr->next->getValue())
-            // {   
-            //     // nodePtr->prev->next = nodePtr->next;
-            //     // nodePtr->prev = nodePtr->next;
-            //     // nodePtr->next = nodePtr->next->next;
-            //     // nodePtr->next->prev = nodePtr->prev;
-            //     // nodePtr->next->next = nodePtr->next;
-            //     nodePtr = nodePtr->next;
-            // }
+            for (int i = 0; i < size; i++)
+            {                
+                nodePtr = head->next;
+                prevNode = head;
+                for(int j = 0; j < size-i-1;j++)
+                {           
+                    if(prevNode->getValue() <= nodePtr->getValue())
+                    {
+                        if(nodePtr->next != NULL)
+                        {
+                            nodePtr->next->prev = prevNode;
+                            prevNode->next = nodePtr->next;
+                        }
+                        else
+                        {
+                            tail = prevNode;
+                            prevNode->next = NULL;
+                        }
+                        nodePtr->next = prevNode;
+                        if(prevNode->prev == NULL)
+                        {
+                            head = nodePtr;
+                            nodePtr->prev = NULL;
+                        }
+                        else
+                        {
+                            prevNode->prev->next = nodePtr;
+                            nodePtr->prev = prevNode->prev;
+                        }
+                        prevNode->prev = nodePtr;
+                        nodePtr = prevNode->next;
+                    }
+                    else
+                    {
+                        prevNode = nodePtr;
+                        nodePtr = nodePtr->next;
+                    }
+                }
+            }
         }
     }
 }
@@ -127,7 +191,7 @@ string SortList<T>::print()
             result += nodePtr->print() + ",";
             nodePtr = nodePtr->next;
         }
-        result += nodePtr->print() + "\n";
+        result += nodePtr->print();
     }
     return result;
 }
