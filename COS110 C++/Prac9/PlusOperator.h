@@ -2,7 +2,7 @@
 #define PLUSOPERATOR_H
 #include "Operator.h"
 template <class T>
-class PlusOperator
+class PlusOperator : public Operator<T>
 {
 public:
     T operator()(T, T);

@@ -4,10 +4,10 @@ template <class T>
 class Operator
 {
 public:
-    Operator(/* args */);
-    T operator()(T, T);
+    Operator();
+    virtual T operator()(T, T) = 0;
     virtual Operator<T>* clone() = 0;
-    ~Operator();
+    virtual ~Operator();
 };
 
 #endif
