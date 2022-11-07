@@ -127,8 +127,8 @@ Back:
 List 2 debug
 Forward:
 <#> at (1,0) Top:Y
-<.> at (3,1) Top:Y
 <#> at (10,1) Top:Y
+<.> at (3,1) Top:Y
 <?> at (4,5) Top:Y
 <.> at (7,8) Top:Y
 <.> at (0,9) Top:Y
@@ -136,8 +136,8 @@ Back:
 <.> at (0,9) Top:Y
 <.> at (7,8) Top:Y
 <?> at (4,5) Top:Y
-<#> at (10,1) Top:Y
 <.> at (3,1) Top:Y
+<#> at (10,1) Top:Y
 <#> at (1,0) Top:Y
 
 
