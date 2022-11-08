@@ -18,6 +18,16 @@
 //#include "Lamp.h"
 //#include "Exit.h"
 
-
+class Game
+{
+private:
+    Map* map;
+    Player* player;
+public:
+    Game(int,int, std::string);
+    ~Game();
+    std::string display();
+    void update(char);
+};
 
 #endif

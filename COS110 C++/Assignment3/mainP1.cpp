@@ -46,20 +46,20 @@ int main()
 {
 //Map without player
 
-	const int w = 5;
-	const int h = 5;
-	string array =
-	"#####"
-	"#...#"
-	"#.#.#"
-	"###.#"
-	"#####";
+	// const int w = 5;
+	// const int h = 5;
+	// string array =
+	// "#####"
+	// "#...#"
+	// "#.#.#"
+	// "###.#"
+	// "#####";
 
 //Map with player
 //When testing, the player should always
 //appear at the top. So, the player should
 //always be visible, even on walls for Part 1
-/*
+	
 	const int w = 5;
 	const int h = 5;
 	string array =
@@ -68,7 +68,6 @@ int main()
 	"#&#.#"
 	"###.#"
 	"#####";
-*/
 
 	basicTest();
 

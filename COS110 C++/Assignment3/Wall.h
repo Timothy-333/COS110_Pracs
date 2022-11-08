@@ -6,5 +6,5 @@ class Wall: public Object
 public:
     Wall(int, int);
 };
-#endif;
+#endif
 

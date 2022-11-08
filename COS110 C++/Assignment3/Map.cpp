@@ -23,8 +23,8 @@ Map::~Map()
 }
 void Map::add(Object* obj)
 {
-    rows[obj->getCoord(false)]->add(obj);
-    columns[obj->getCoord(true)]->add(obj);
+    rows[obj->getCoord(true)]->add(obj);
+    columns[obj->getCoord(false)]->add(obj);
 }
 string Map::print()
 {

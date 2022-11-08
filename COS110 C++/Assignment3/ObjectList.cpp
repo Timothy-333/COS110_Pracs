@@ -34,6 +34,7 @@ void ObjectList::add(Object* obj)
         {
             prevNode->setNext(obj, dimension);
             obj->setNext(nodePtr, dimension);
+            obj->setPrev(prevNode,dimension);
             if(nodePtr != NULL)
                 nodePtr->setPrev(obj, dimension);
         }
@@ -72,31 +73,33 @@ string ObjectList::debug()
     ss << "Forward:\n";
     string output = "";
     Object* nodePtr = head;
+    Object* lastNode = head;
     while(nodePtr != NULL)
     {
-        ss << nodePtr->getIcon() << " at (" << nodePtr->getNext(dimension) << "," << nodePtr->getCoord(!dimension) << ") ";
+        ss << "<" << nodePtr->getIcon() << "> at (" << nodePtr->getCoord(false) << "," << nodePtr->getCoord(true) << ") ";
         if(nodePtr->above != NULL)
             ss << "Top: N" << endl;
         else
         {
             ss << "Top: Y" << endl;
         }
-        output += ss.str();
+        if(nodePtr->getNext(dimension) == NULL)
+            lastNode = nodePtr;
         nodePtr = nodePtr->getNext(dimension);
     }
-    ss << "Backward:\n";
+    nodePtr = lastNode;
+    ss << "Back:\n";
     while (nodePtr != NULL)
     {
-        ss << nodePtr->getIcon() << " at (" << nodePtr->getPrev(dimension) << "," << nodePtr->getCoord(!dimension) << ") ";
+        ss << "<" << nodePtr->getIcon() << "> at (" << nodePtr->getCoord(false) << "," << nodePtr->getCoord(true) << ") ";
         if(nodePtr->above != NULL)
             ss << "Top: N" << endl;
         else
         {
             ss << "Top: Y" << endl;
         }
-        output += ss.str();
         nodePtr = nodePtr->getPrev(dimension);
     }
-    
+    output += ss.str();
     return output;
 }
