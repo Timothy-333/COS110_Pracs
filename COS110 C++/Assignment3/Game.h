@@ -13,16 +13,19 @@
 
 
 //Uncomment for Part 2
-//#include "MessageQueue.h"
-//#include "Door.h"
-//#include "Lamp.h"
-//#include "Exit.h"
+#include "MessageQueue.h"
+#include "Door.h"
+#include "Lamp.h"
+#include "Exit.h"
 
 class Game
 {
 private:
     Map* map;
     Player* player;
+    MessageQueue* messages;
+    Exit* exit;
+    void playerInteract(Object*);
 public:
     Game(int,int, std::string);
     ~Game();

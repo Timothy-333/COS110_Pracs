@@ -1,10 +1,13 @@
-ofiles = mainP1.o Door.o Exit.o Floor.o Game.o Lamp.o Map.o Player.o Wall.o Object.o ObjectList.o Message.o MessageQueue.o
+ofiles = mainP2.o Door.o Exit.o Floor.o Game.o Lamp.o Map.o Player.o Wall.o Object.o ObjectList.o Message.o MessageQueue.o
 
 main: $(ofiles)
 	g++ -static $(ofiles) -o main
 
-mainP1.o: mainP1.cpp Game.h
-	g++ -c mainP1.cpp
+#mainP1.o: mainP1.cpp Game.h
+#	g++ -c mainP1.cpp
+
+mainP2.o: mainP2.cpp Game.h
+	g++ -c mainP2.cpp
 
 Door.o: Door.cpp Door.h Object.h
 	g++ -c Door.cpp

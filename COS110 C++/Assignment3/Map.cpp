@@ -5,8 +5,17 @@ using namespace std;
 
 Map::Map(int w, int h)
 {
-    width = w;
-    height = h;
+    if (w < 1 || h < 1)
+    {
+        width = 1;
+        height = 1;
+    }
+    else
+    {
+        width = w;
+        height = h;
+    }
+    lights = new ObjectList(false);
     rows = new ObjectList*[height];
     columns = new ObjectList*[width];
     for (int i = 0; i < height; i++)
@@ -20,6 +29,16 @@ Map::Map(int w, int h)
 }
 Map::~Map()
 {
+    for (int i = 0; i < height; i++)
+    {
+        delete rows[i];
+    }
+    delete[] rows;
+    for (int i = 0; i < width; i++)
+    {
+        delete columns[i];
+    }
+    delete[] columns;
 }
 void Map::add(Object* obj)
 {
@@ -35,4 +54,43 @@ string Map::print()
         output += "\n";
     }
     return output;
+}
+void Map::addLight(Object* obj)
+{
+    lights->add(obj);
+}
+Object* Map::getAt(int x, int y)
+{
+    Object* temp = rows[y]->iterate();
+    while (temp != NULL)
+    {
+        if (temp->getCoord(false) == x)
+            return temp;
+        temp = rows[y]->iterate();
+    }
+    rows[y]->reset();
+    return NULL;
+}
+void Map::resetEnvironment()
+{
+    for (int i = 0; i < height; i++)
+    {
+        Object* temp = rows[i]->iterate();
+        while (temp != NULL)
+        {
+            temp->update();
+            temp = rows[i]->iterate();
+        }
+        rows[i]->reset();
+    }
+}
+void Map::updateEnvironment()
+{
+    lights->reset();
+    Object* temp = lights->iterate();
+    while (temp != NULL)
+    {
+        temp->update();
+        temp = lights->iterate();
+    }
 }

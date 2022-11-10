@@ -9,6 +9,8 @@ protected:
     char icon;
     int xPos;
     int yPos;
+    bool solid;
+    bool lit;
 public:
     Object* nextHoriz;
     Object* nextVert;
@@ -24,5 +26,9 @@ public:
     Object* getPrev(bool);
     void setNext(Object*, bool);
     void setPrev(Object*, bool);
+    virtual void update();
+    bool isSolid();
+    virtual void updateLight(char, int);
+    virtual void interact();
 };
 #endif

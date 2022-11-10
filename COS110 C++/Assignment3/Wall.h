@@ -5,6 +5,7 @@ class Wall: public Object
 {
 public:
     Wall(int, int);
+    void updateLight(char, int);
 };
 #endif
 
