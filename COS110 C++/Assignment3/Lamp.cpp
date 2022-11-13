@@ -4,7 +4,7 @@ using namespace std;
 
 Lamp::Lamp(int x, int y): Object(x, y)
 {
-    solid = false;
+    solid = true;
     icon = '^';
     lit = true;
 }

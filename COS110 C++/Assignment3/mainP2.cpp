@@ -91,20 +91,33 @@ int main()
 	// "^....#..+..^..#+#"
 	// "###############^#";
 
-	const int w = 17;
+	// const int w = 17;
+	// const int h = 6;
+	// string array =
+	// ".########^#######"
+	// "^^..&...#..+....^"
+	// "^....#..#.+^+...#"
+	// "^....#..#..+....."
+	// "^....#..+.#^#.#+#"
+	// ".##############^@";
+	
+	// const int w = 10;
+	// const int h = 4;
+	// string array =
+	// "^+=^=+^++^"
+	// "^=^=&+^+=^"
+	// "^^=^++^+^^"
+	// "^^^^^^^^^^";
+
+	const int w = 12;
 	const int h = 6;
 	string array =
-	".########^#######"
-	"^^..&...#..+....^"
-	"^....#..#.+^+...#"
-	"^....#..#..+....."
-	"^....#..+.#^#.#+#"
-	".##############^@";
-	
-	// const int w = 11;
-	// const int h = 1;
-	// string array =
-	// "&^+@^^^^^^#";
+	"&..........^"
+	".....^.....^"
+	"...........^"
+	"^.........^^"
+	".^......^..^"
+	"...........^";
 
 
 	Game* game = new Game(w, h, array);
@@ -112,7 +125,7 @@ int main()
 
 	cout<<game->display()<<endl;
 	bool running = true;
-	string mess = "";
+	string mess = "yes";
 	while (running)
 	{
 		char action;
@@ -133,7 +146,41 @@ int main()
 		
 		cout<<game->display()<<endl;
 	}
+	cout<<endl<<mess<<endl;
 
+	const int a = 9;
+	const int b = 2;
+	string array1 =
+	"....^&.@."
+	"....^....";
+
+	cout<<endl<<mess<<endl;
+	Game* game1 = new Game(a, b, array1);
+	cout<<endl<<mess<<endl;
+
+	cout<<game1->display()<<endl;
+	running = true;
+	while (running)
+	{
+		char action;
+		cin>>action;
+
+		if (action == 'q') //Quit
+			break;
+
+		try
+		{
+			game1->update(action);
+		}
+		catch(string m)
+		{
+			mess = m;
+			running = false;
+		}
+		
+		cout<<game1->display()<<endl;
+	}
+	delete game1;
 	cout<<endl<<mess<<endl;
 	
 

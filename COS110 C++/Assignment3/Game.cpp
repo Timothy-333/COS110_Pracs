@@ -1,6 +1,7 @@
 #include "Game.h"
 
 using namespace std;
+#include <iostream>
 
 Game::Game(int w, int h, string chars)
 {
@@ -47,6 +48,7 @@ Game::Game(int w, int h, string chars)
             }
             else
                 map->add(new Floor(j, i));
+            
         }
     }
     messages = new MessageQueue(4);
@@ -55,8 +57,6 @@ Game::Game(int w, int h, string chars)
 }
 Game::~Game()
 {
-    delete map;
-    delete player;
 }
 string Game::display()
 {
