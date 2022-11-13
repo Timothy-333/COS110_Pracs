@@ -112,7 +112,7 @@ int main()
 	const int w = 12;
 	const int h = 6;
 	string array =
-	"&..........^"
+	"&+.@.......^"
 	".....^.....^"
 	"...........^"
 	"^.........^^"
@@ -121,7 +121,7 @@ int main()
 
 
 	Game* game = new Game(w, h, array);
-
+	// Game* game1 = new Game(w, h, array);
 
 	cout<<game->display()<<endl;
 	bool running = true;

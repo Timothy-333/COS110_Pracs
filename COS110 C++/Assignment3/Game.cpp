@@ -77,95 +77,95 @@ void Game::update(char c)
         switch (c)
         {
             case '1':
-                try
+                {try
                 {
                     player->move(-1, 1);
                 }
-                catch (const char* msg)
+                catch (string msg)
                 {
                     Message* message = new Message(msg);
                     messages->addMessage(message);
                 }
-                break;
+                break;}
             case '2':
-                try
+                {try
                 {
                     player->move(0, 1);
                 }
-                catch (const char* msg)
+                catch (string msg)
                 {
                     Message* message = new Message(msg);
                     messages->addMessage(message);
                 }
-                break;
+                break;}
             case '3':
-                try
+                {try
                 {
                     player->move(1, 1);
                 }
-                catch (const char* msg)
+                catch (string msg)
                 {
                     Message* message = new Message(msg);
                     messages->addMessage(message);
                 }
-                break;
+                break;}
             case '4':
-                try
+                {try
                 {
                     player->move(-1, 0);
                 }
-                catch (const char* msg)
+                catch (string msg)
                 {
                     Message* message = new Message(msg);
                     messages->addMessage(message);
                 }
-                break;
+                break;}
             case '6':
-                try
+                {try
                 {
                     player->move(1, 0);
                 }
-                catch (const char* msg)
+                catch (string msg)
                 {
                     Message* message = new Message(msg);
                     messages->addMessage(message);
                 }
-                break;
+                break;}
             case '7':
-                try
+                {try
                 {
                     player->move(-1, -1);
                 }
-                catch (const char* msg)
+                catch (string msg)
                 {
                     Message* message = new Message(msg);
                     messages->addMessage(message);
                 }
-                break;
+                break;}
             case '8':
-                try
+                {try
                 {
                     player->move(0, -1);
                 }
-                catch (const char* msg)
+                catch (string msg)
                 {
                     Message* message = new Message(msg);
                     messages->addMessage(message);
                 }
-                break;
+                break;}
             case '9':
-                try
+                {try
                 {
                     player->move(1, -1);
                 }
-                catch (const char* msg)
+                catch (string msg)
                 {
                     Message* message = new Message(msg);
                     messages->addMessage(message);
                 }
-                break;
+                break;}
             case 'e':
-                Object* temp = player;
+                {Object* temp = player;
                 while (temp->below!=NULL)
                 {
                     temp = temp->below;
@@ -178,7 +178,9 @@ void Game::update(char c)
                     playerInteract(temp->nextVert);
                 if(temp->prevVert)
                     playerInteract(temp->prevVert);
-                break;
+                break;}
+            default:
+                {break;}
         }
         if(player->below == exit)
         {
