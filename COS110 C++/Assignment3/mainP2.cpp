@@ -112,8 +112,8 @@ int main()
 	const int w = 12;
 	const int h = 6;
 	string array =
-	"&+.@.......^"
-	".....^.....^"
+	".+.@.......^"
+	"..&..^.....^"
 	"...........^"
 	"^.........^^"
 	".^......^..^"
@@ -154,9 +154,7 @@ int main()
 	"....^&.@."
 	"....^....";
 
-	cout<<endl<<mess<<endl;
 	Game* game1 = new Game(a, b, array1);
-	cout<<endl<<mess<<endl;
 
 	cout<<game1->display()<<endl;
 	running = true;

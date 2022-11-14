@@ -8,6 +8,12 @@ Object::Object(int x, int y)
     icon = '?';
     lit = true;
     solid = true;
+    nextHoriz = NULL;
+    nextVert = NULL;
+    prevHoriz = NULL;
+    prevVert = NULL;
+    above = NULL;
+    below = NULL;
 }
 char Object::getIcon()
 {
