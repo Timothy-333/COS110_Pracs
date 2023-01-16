@@ -1,6 +1,5 @@
 #include "Map.h"
 
-
 using namespace std;
 
 Map::Map(int w, int h)
@@ -29,16 +28,6 @@ Map::Map(int w, int h)
 }
 Map::~Map()
 {
-    for (int i = 0; i < height; i++)
-    {
-        delete rows[i];
-    }
-    delete[] rows;
-    for (int i = 0; i < width; i++)
-    {
-        delete columns[i];
-    }
-    delete[] columns;
 }
 void Map::add(Object* obj)
 {
@@ -75,13 +64,13 @@ void Map::resetEnvironment()
 {
     for (int i = 0; i < height; i++)
     {
+        rows[i]->reset();
         Object* temp = rows[i]->iterate();
         while (temp != NULL)
         {
             temp->update();
             temp = rows[i]->iterate();
         }
-        rows[i]->reset();
     }
 }
 void Map::updateEnvironment()

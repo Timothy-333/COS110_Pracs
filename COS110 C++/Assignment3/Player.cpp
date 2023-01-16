@@ -23,7 +23,10 @@ void Player::move(int x, int y)
                 if(floorPtr->getNext(false) != NULL && floorPtr->getNext(false)->getPrev(true) != NULL)
                 {
                     if (floorPtr->getNext(false)->getPrev(true)->isSolid())
-                        throw "Walked into something";
+                        {
+                            string out = "Walked into something";
+                            throw out;
+                        }
                     floorPtr = floorPtr->getNext(false)->getPrev(true);
                     while(floorPtr->above != NULL)
                         floorPtr = floorPtr->above;
@@ -42,7 +45,8 @@ void Player::move(int x, int y)
                 }
                 else
                 {
-                    throw "Out of bounds";
+                    string message = "Out of bounds";
+                    throw message;
                 }
                 
             }
@@ -70,7 +74,8 @@ void Player::move(int x, int y)
                 }
                 else
                 {
-                    throw "Out of bounds";
+                    string message = "Out of bounds";
+                    throw message;
                 }
             }
             else
@@ -87,7 +92,8 @@ void Player::move(int x, int y)
                 }
                 else
                 {
-                    throw "Out of bounds";
+                    string message = "Out of bounds";
+                    throw message;
                 }
             }
         }
@@ -117,7 +123,8 @@ void Player::move(int x, int y)
                 }
                 else
                 {
-                    throw "Out of bounds";
+                    string message = "Out of bounds";
+                    throw message;
                 }
             }
             else if(y == 1)
@@ -144,7 +151,8 @@ void Player::move(int x, int y)
                 }
                 else
                 {
-                    throw "Out of bounds";
+                    string message = "Out of bounds";
+                    throw message;
                 }
             }
             else
@@ -161,7 +169,8 @@ void Player::move(int x, int y)
                 }
                 else
                 {
-                    throw "Out of bounds";
+                    string message = "Out of bounds";
+                    throw message;
                 }
             }
         }
@@ -181,7 +190,8 @@ void Player::move(int x, int y)
                 }
                 else
                 {
-                    throw "Out of bounds";
+                    string message = "Out of bounds";
+                    throw message;
                 }
             }
             else if(y == 1)
@@ -198,7 +208,8 @@ void Player::move(int x, int y)
                 }
                 else
                 {
-                    throw "Out of bounds";
+                    string message = "Out of bounds";
+                    throw message;
                 }
             }
         }
